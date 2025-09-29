@@ -1,54 +1,69 @@
-'use client';
+"use client";
+import { login } from "@/actions/login";
 import {
-  Alert,
-  AlertIcon,
-  AlertTitle,
-  AlertDescription,
-  Box,
-  Button,
   Flex,
+  Box,
+  Heading,
+  Icon,
   FormControl,
   FormLabel,
-  Icon,
   Input,
   InputGroup,
-  Heading,
-  Text,
   InputRightElement,
+  Button,
+  useToast,
+  Link
 } from "@chakra-ui/react";
-import { FaEye, FaEyeSlash } from 'react-icons/fa'
-import { useState } from "react";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { useState, useRef } from "react";
+
+import { verify } from "@/actions/captcha";
 import ReCAPTCHA from "react-google-recaptcha";
 
-export default function Login() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+export default function ClientPage() {
   const [show, setShow] = useState(false);
-  const [verified, setVerified] = useState(null);
-
-  const handleClick = () => setShow(!show);
-  
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Email:", email);
-    console.log("Password:", password);
-    // Aquí podrías llamar a tu backend o Supabase
-    
+  const [verified, setVerified] = useState(false);
+  const toast = useToast();
+  const createToast = (description, status) => {
+        toast({
+            title: "Iniciar sesion",
+            description: description,
+            status: status,
+            duration: 5000,
+            isClosable: true,
+            position: "bottom",
+        });
+    };
+  const handleClick = async (formData) => {
+    if (verified) {
+        const response = await login(formData);
+        if (response.success) {
+          createToast(response.data?.mensaje, "success");
+          window.location.href = "/dashboard";
+        } else {
+          createToast(response.data?.mensaje, "error");
+        }
+    } else {
+        createToast("Completa el captcha", "error");
+    }
   };
-
-  const handleVerify = async (token) => {
-    const res = await fetch("http://localhost:4000/api/verify-recaptcha", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ token }),
-    });
-
-    const data = await res.json();
-    setVerified(data.success ? "Humano confirmado" : "Falló la validación");
-  };
+  const handleVerify = async (token) =>{
+    const data = await verify(token);
+    if (data.success) {
+        setVerified(true);
+    } else {
+        setVerified(false)
+    }
+  }
 
   return (
-    <Flex minH="100vh" align="center" justify="center" bg="gray.50" direction="column">
+    <Flex
+      minH="100vh"
+      align="center"
+      justify="center"
+      bg="gray.50"
+      direction="column"
+    >
       <Box
         bg="white"
         p={8}
@@ -57,31 +72,30 @@ export default function Login() {
         w="full"
         maxW="md"
         as="form"
-        onSubmit={handleSubmit}
+        action={handleClick}
       >
         <Heading mb={6} textAlign="center" size="lg">
           Iniciar Sesión
         </Heading>
-
         <FormControl id="email" mb={4}>
-          <FormLabel>Email</FormLabel>
-          <Input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="tu@email.com"
-          />
+          <FormLabel>Usuario</FormLabel>
+          <Input type="text" placeholder="tu usuario" name="user" />
         </FormControl>
-
         <FormControl id="password" mb={6}>
           <FormLabel>Contraseña</FormLabel>
-          <InputGroup >
+          <InputGroup>
             <Input
-              type={show ? 'text' : 'password'}
+              type={show ? "text" : "password"}
               placeholder="Ingresar Contraseña"
+              name="password"
             />
             <InputRightElement>
-              <Button onClick={handleClick} variant='ghost'>
+              <Button
+                onClick={() => {
+                  setShow(!show);
+                }}
+                variant="ghost"
+              >
                 <Icon as={show ? FaEyeSlash : FaEye} />
               </Button>
             </InputRightElement>
@@ -93,25 +107,11 @@ export default function Login() {
             onChange={handleVerify}
           />
         </Box>
-        <Button type="submit" colorScheme="teal" w="full" mb={4}>
+        <Button colorScheme="teal" w="full" mb={4} type="submit">
           Entrar
         </Button>
-
-        <Text fontSize="sm" textAlign="center">
-          Hola{" "}
-          <Box as="a" href="/register" color="teal.500">
-            Mundo
-          </Box>
-        </Text>
+        <Link color='teal.500' href="/forgot-password">Recuperar Contraseña</Link>
       </Box>
-      {verified &&
-        <Box>
-          <Alert status={verified === "Humano confirmado" ? "success" : "error"}>
-            <AlertIcon />
-            {verified}
-          </Alert>
-        </Box>
-      }
     </Flex>
   );
 }
