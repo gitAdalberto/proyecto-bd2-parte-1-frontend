@@ -11,9 +11,9 @@ const roleRoutes = {
     "/access",
     "/transactions",
     "/reports",
-    "/unauthorized"
+    "/unauthorized",
   ], // Rutas que puede acceder admin
-  secretaria: ["/","/students", "/dashboard", "/options", "/unauthorized"], // Rutas que puede acceder secretaria
+  secretaria: ["/", "/students", "/dashboard", "/options", "/unauthorized"], // Rutas que puede acceder secretaria
 };
 
 const publicRoutes = ["/login", "/forgot-password", "/reset-password"];
@@ -28,6 +28,10 @@ export default async function middleware(req) {
   //console.log("Session en middleware:", session);
 
   // Redirigir si no hay sesión y la ruta está protegida
+  if (path === "/") {
+    return NextResponse.redirect(new URL("/dashboard", req.nextUrl));
+  }
+
   if (
     !session?.userId &&
     (roleRoutes.admin.includes(path) || roleRoutes.secretaria.includes(path))
@@ -38,7 +42,7 @@ export default async function middleware(req) {
   // Validación por rol
   if (session?.role) {
     const allowedRoutes = roleRoutes[session.role] || [];
-    
+
     if (!allowedRoutes.includes(path)) {
       console.log("no autorizado");
       return NextResponse.redirect(new URL("/unauthorized", req.nextUrl));

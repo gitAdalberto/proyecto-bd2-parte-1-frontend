@@ -25,7 +25,6 @@ export default function OptionsPanel({  }) {
           });
       };
     const handleLogout = async () => {
-      
         const response = await verifyLogout();
         if (response.success) {
           createToast(response.data?.mensaje, "success");
@@ -37,7 +36,7 @@ export default function OptionsPanel({  }) {
     };
   return (
     <>
-      <Flex w="95%" align="flex-start" justifyContent="flex-start" direction='column' gap='2em' ml='2em'>
+      <Flex  align="flex-start" justifyContent="flex-start" direction='column' gap='2em' ml='2em' mt='2em'>
         <Box>
           <Heading as='h3' size='lg' mb='1em'>Opciones de usuario</Heading>
           <Text mb='1em' fontWeight='medium'>Cambiar de Contraseña</Text>

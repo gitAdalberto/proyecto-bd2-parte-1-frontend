@@ -1,4 +1,4 @@
-import { getUsers, handleTitle } from "@/actions/user";
+import { getUsers } from "@/actions/user";
 import SidebarWrapper from "@/components/SidebarWrapper";
 import UsersPanel from "./UsersPanel";
 

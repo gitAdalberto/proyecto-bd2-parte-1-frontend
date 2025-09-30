@@ -26,8 +26,9 @@ export default function TransactionPanel({ initialData, initialError }) {
     const [pending, startTransition] = useTransition();
     return (
         <Flex w='100%'>
-            <Flex w='100%' align="center" justifyContent="center" direction="column">
-                <Flex w="80vw" mx="2em" mb='2em' direction="row" gap="1em">
+            <Flex  align="center" justifyContent="center" direction="column" m='2em'>
+                <Heading fontWeight='normal'>Panel de Transacciones</Heading>
+                <Flex w="80vw"  mb='2em' direction="row" gap="1em">
                     <PdfButton2 fileName='Reporte de transacciones' id='pdf'/>
                 </Flex>
                 {pending && <Flex h='100vh'><Spinner size="xl" /></Flex>}

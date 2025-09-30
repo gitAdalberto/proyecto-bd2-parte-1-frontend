@@ -41,9 +41,10 @@ export default function UsersPanel({ initialUsers, initialError }) {
     }
 
     return (
-        <Flex w='100%'>
-            <Flex align='center' justifyContent='center' direction='column'>
-                <Flex w='80vw' ml='2em' mb='2em' direction='row' gap='1em'>
+        <Flex w='100%' mt='0.5em'>
+            <Flex align='center' justifyContent='center' direction='column' m='2em'>
+                <Heading fontWeight='normal'>Panel de Usuarios</Heading>
+                <Flex w='80vw'  mb='2em' direction='row' gap='1em'>
                     <AddButton handleFetch={handleFetch} />
                     <Button colorScheme="teal" variant='outline' onClick={handleFetch} leftIcon={<RepeatIcon />}>Refrescar</Button>
                     <PdfButton2 fileName="ReporteUsuarios" id='pdf'/>

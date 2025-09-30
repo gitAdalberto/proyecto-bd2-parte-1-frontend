@@ -46,7 +46,7 @@ export default function ChangeButton() {
             <Modal isOpen={isOpen} onClose={onClose} initialFocusRef={initialRef}>
                 <ModalOverlay />
                 <ModalContent>
-                    <ModalHeader>Modal Title</ModalHeader>
+                    <ModalHeader>Cambiar Contraseña</ModalHeader>
                     <ModalCloseButton />
                     <Box as="form" action={handleClick} direction="column">
                         <ModalBody>

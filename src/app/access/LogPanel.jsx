@@ -4,7 +4,7 @@ import { Box, Flex, Text } from "@chakra-ui/react";
 export default function LogPanel({ logs }) {
     return (
         <Flex w='100%' align='center' justifyContent='center' direction='column'>
-            <Flex w="100%" mx="2em" mb='2em' direction="row" gap="1em">
+            <Flex w="100%" mx="2em" mb='2em' direction="row" gap="1em" mt='1em'>
                 <PdfButton2 fileName="Reporte de Archivo Log" id='pdf-2' />
             </Flex>
             <Flex
@@ -13,7 +13,7 @@ export default function LogPanel({ logs }) {
                 maxH="400px"
                 overflowY="auto"
                 p={4}
-                border="1px solid lightgray"
+                border="1px solid gray"
                 borderRadius="md"
                 gap={2}
                 id="pdf-2"

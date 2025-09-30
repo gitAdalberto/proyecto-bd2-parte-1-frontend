@@ -132,7 +132,8 @@ export const getCurrentUserName = async () => {
   //recogemos el rol y id de la session
   const userId = session?.userId;
   const userRole = session?.role;
-
+  console.log("current username")
+  console.log({ userId, userRole })
   //fetch
   try {
     const response = await api.post(`/usuarios/${userId}`, {

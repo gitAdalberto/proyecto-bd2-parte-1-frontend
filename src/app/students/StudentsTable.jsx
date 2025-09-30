@@ -10,16 +10,20 @@ import {
     Flex,
     Spinner,
     Button,
-    Box
+    Box,
+    Heading,
+    Icon
 } from "@chakra-ui/react";
 import { useState, useTransition } from "react";
 import { RepeatIcon } from "@chakra-ui/icons";
 import { getStudents } from "@/actions/students";
+import { FaBookOpenReader } from "react-icons/fa6";
 import DeleteButton from "./DeleteButton";
 import EditButton from "./EditButton";
 import AddButton from "./AddButton";
 import ShowButton from "./ShowButton";
 import PdfButton2 from "@/components/PdfButton2";
+
 
 
 
@@ -42,8 +46,9 @@ export default function StudentsTable({ initialStudents, initialError }) {
 
     return (
         <Flex w='100%'>
-            <Flex align="center" justifyContent="center" direction="column">
-                <Flex w="80vw" m="2em" direction="row" gap="1em">
+            <Flex align="center" justifyContent="center" direction="column" m="2em">
+                <Heading  fontWeight='normal'>Panel de Estudiantes</Heading>
+                <Flex w="80vw"  direction="row" gap="1em" mb='2em'>
                     <AddButton handleFetch={handleFetch} />
                     <Button colorScheme="teal" variant='outline' onClick={handleFetch} leftIcon={<RepeatIcon />}>Refrescar</Button>
                     <PdfButton2 fileName='ReporteEstudiantes' id='pdf'/>
