@@ -61,11 +61,9 @@ export default function ClientPage() {
       minH="100vh"
       align="center"
       justify="center"
-      bg="gray.50"
       direction="column"
     >
       <Box
-        bg="white"
         p={8}
         rounded="lg"
         shadow="md"
@@ -73,6 +71,7 @@ export default function ClientPage() {
         maxW="md"
         as="form"
         action={handleClick}
+        border='2px solid lightblue'
       >
         <Heading mb={6} textAlign="center" size="lg">
           Iniciar Sesión

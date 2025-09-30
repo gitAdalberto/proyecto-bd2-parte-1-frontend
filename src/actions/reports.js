@@ -55,7 +55,6 @@ export const getFilterAccess = async (usuario, nuevoEstado, accion, fechaInicio,
     const userRole = session?.role;
 
     if (userRole !== "admin") redirect("/dashboard");
-    console.log({ usuario, nuevoEstado, accion, fechaInicio, fechaFin })
     try {
         const response = await api.post("/filtrarAccesos",{
             
@@ -67,7 +66,6 @@ export const getFilterAccess = async (usuario, nuevoEstado, accion, fechaInicio,
                 accion: accion
             
         });
-        console.log(response.data)
         return { success: true, data: response?.data };
     } catch (err) {
         return { success: false, data: err.response?.data };

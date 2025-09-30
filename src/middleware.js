@@ -2,11 +2,20 @@ import { NextResponse } from "next/server";
 import { decrypt } from "@/app/lib/session";
 
 const roleRoutes = {
-  admin: ["/students", "/dashboard", "/options", "/users", "/access", "/transactions","/reports"],        // Rutas que puede acceder admin
-  secretaria: ["/students", "/dashboard" , "/options"] // Rutas que puede acceder secretaria
+  admin: [
+    "/",
+    "/students",
+    "/dashboard",
+    "/options",
+    "/users",
+    "/access",
+    "/transactions",
+    "/reports",
+  ], // Rutas que puede acceder admin
+  secretaria: ["/","/students", "/dashboard", "/options"], // Rutas que puede acceder secretaria
 };
 
-const publicRoutes = ["/login", "/forgot-password", "/reset-password"];
+const publicRoutes = ["/login", "/forgot-password", "/reset-password", "/unauthorized"];
 
 export default async function middleware(req) {
   const path = req.nextUrl.pathname;
@@ -28,8 +37,10 @@ export default async function middleware(req) {
   // Validación por rol
   if (session?.role) {
     const allowedRoutes = roleRoutes[session.role] || [];
+    
     if (!allowedRoutes.includes(path)) {
-      return NextResponse.redirect(new URL("/unauthorized", req.nextUrl));
+      console.log("no autorizado");
+      return NextResponse.redirect(new URL("/dashboard", req.nextUrl));
     }
   }
 
