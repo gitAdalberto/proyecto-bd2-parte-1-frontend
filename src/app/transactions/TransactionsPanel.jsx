@@ -34,7 +34,7 @@ export default function TransactionPanel({ initialData, initialError }) {
                 {!pending && data.length > 0 && (
                     <Box id="pdf">
                         <Box overflowX='auto' w="80vw" border="1px solid lightgray" borderRadius="8px" boxShadow='lg'>
-                            <Table variant="striped" size="sm" colorScheme="teal">
+                            <Table variant="simple" size="sm" >
                                 <TableCaption>Tabla de accesos</TableCaption>
                                 <Thead>
                                     <Tr >

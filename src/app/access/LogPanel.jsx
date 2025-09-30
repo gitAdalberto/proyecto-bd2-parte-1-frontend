@@ -15,14 +15,13 @@ export default function LogPanel({ logs }) {
                 p={4}
                 border="1px solid lightgray"
                 borderRadius="md"
-                bg="gray.50"
                 gap={2}
                 id="pdf-2"
             >
                 {logs && logs.length > 0 ? (
                     logs.map((line, index) => (
-                        <Box key={index} p={2} bg="white" borderRadius="md" shadow="sm">
-                            <Text fontSize="sm" color="gray.800">
+                        <Box key={index} p={2} borderRadius="md">
+                            <Text fontSize="sm" >
                                 {line}
                             </Text>
                         </Box>

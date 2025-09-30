@@ -27,7 +27,7 @@ export default function ShowButton({
     const { isOpen, onOpen, onClose } = useDisclosure()
     return (
         <>
-            <Button onClick={onOpen} colorScheme='blue'><InfoIcon color='white' /></Button>
+            <Button onClick={onOpen} colorScheme='blue' variant='outline' leftIcon={<InfoIcon />} iconSpacing='0'></Button>
 
             <Modal isOpen={isOpen} onClose={onClose} isCentered scrollBehavior='inside'>
                 <ModalOverlay />

@@ -11,11 +11,12 @@ const roleRoutes = {
     "/access",
     "/transactions",
     "/reports",
+    "/unauthorized"
   ], // Rutas que puede acceder admin
-  secretaria: ["/","/students", "/dashboard", "/options"], // Rutas que puede acceder secretaria
+  secretaria: ["/","/students", "/dashboard", "/options", "/unauthorized"], // Rutas que puede acceder secretaria
 };
 
-const publicRoutes = ["/login", "/forgot-password", "/reset-password", "/unauthorized"];
+const publicRoutes = ["/login", "/forgot-password", "/reset-password"];
 
 export default async function middleware(req) {
   const path = req.nextUrl.pathname;
@@ -40,7 +41,7 @@ export default async function middleware(req) {
     
     if (!allowedRoutes.includes(path)) {
       console.log("no autorizado");
-      return NextResponse.redirect(new URL("/dashboard", req.nextUrl));
+      return NextResponse.redirect(new URL("/unauthorized", req.nextUrl));
     }
   }
 

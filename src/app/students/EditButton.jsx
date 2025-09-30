@@ -72,7 +72,7 @@ export default function EditButton({ id, nombre, apellido, carne, correo, telefo
 
     return (
         <>
-            <Button onClick={onOpen} colorScheme='blue' ref={finalRef}><EditIcon color="white" /></Button>
+            <Button  variant='outline' onClick={onOpen} colorScheme='blue' ref={finalRef} leftIcon={<EditIcon/>} iconSpacing='0'></Button>
 
             <Modal isOpen={isOpen} onClose={onClose} initialFocusRef={initialRef} finalFocusRef={finalRef} isCentered>
                 <ModalOverlay />

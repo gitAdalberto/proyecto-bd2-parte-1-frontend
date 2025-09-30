@@ -18,7 +18,7 @@ export default function LastAccessComponent({ data, title }) {
                 {error && <p style={{ color: "red" }}>{error}</p>}
                 {!pending && newData.length > 0 && (
                     <Box id='pdf-1' overflowX='auto' w="60vw" border="1px solid lightgray" borderRadius="8px" boxShadow='lg'>
-                        <Table variant="striped" size="sm" colorScheme="teal">
+                        <Table variant="simple" size="sm">
                             <TableCaption>Ultimo acceso exitoso por usuario</TableCaption>
                             <Thead>
                                 <Tr >

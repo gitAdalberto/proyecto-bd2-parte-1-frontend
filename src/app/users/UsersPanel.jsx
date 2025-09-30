@@ -45,15 +45,15 @@ export default function UsersPanel({ initialUsers, initialError }) {
             <Flex align='center' justifyContent='center' direction='column'>
                 <Flex w='80vw' ml='2em' mb='2em' direction='row' gap='1em'>
                     <AddButton handleFetch={handleFetch} />
-                    <Button colorScheme="green" variant='outline' onClick={handleFetch} leftIcon={<RepeatIcon />}>Refrescar</Button>
-                    <PdfButton2 fileName="ReporteUsuarios" />
+                    <Button colorScheme="teal" variant='outline' onClick={handleFetch} leftIcon={<RepeatIcon />}>Refrescar</Button>
+                    <PdfButton2 fileName="ReporteUsuarios" id='pdf'/>
                 </Flex>
                 {pending && <Flex h='100vh'><Spinner size="xl" /></Flex>}
                 {error && <p style={{ color: "red" }}>{error}</p>}
                 {!pending && users.length > 0 && (
                     <Box id="pdf">
                         <Box overflowX='auto' w="80vw" border="1px solid lightgray" borderRadius="8px" boxShadow='lg'>
-                            <Table variant='striped' size='sm' colorScheme="teal">
+                            <Table variant='simple' size='sm'>
                                 <TableCaption>Tabla de usuarios</TableCaption>
                                 <Thead>
                                     <Tr>

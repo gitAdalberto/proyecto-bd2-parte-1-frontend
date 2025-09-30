@@ -26,10 +26,9 @@ export default function AccessPanel({ initialData, initialError }) {
     const [pending, startTransition] = useTransition();
     return (
         <Flex w='100%'>
-            
             <Flex w='100%' align="center" justifyContent="center" direction="column">
                 <Heading as='h2' size='lg'>Panel de Accesos</Heading>
-                <Flex w="80vw" mx="2em" mb='2em' direction="row" gap="1em">
+                <Flex w="80vw"  mb='2em' direction="row" gap="1em">
                     <PdfButton2 fileName="Reporte de accesos" id='pdf'/>
                 </Flex>
                 {pending && <Flex h='100vh'><Spinner size="xl" /></Flex>}

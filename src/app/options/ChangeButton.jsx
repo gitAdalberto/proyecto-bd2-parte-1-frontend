@@ -41,7 +41,7 @@ export default function ChangeButton() {
     };
     return (
         <>
-            <Button colorScheme='blue' onClick={onOpen}>Cambiar</Button>
+            <Button colorScheme='blue' variant='outline' onClick={onOpen}>Cambiar</Button>
 
             <Modal isOpen={isOpen} onClose={onClose} initialFocusRef={initialRef}>
                 <ModalOverlay />

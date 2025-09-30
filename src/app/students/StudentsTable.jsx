@@ -45,7 +45,7 @@ export default function StudentsTable({ initialStudents, initialError }) {
             <Flex align="center" justifyContent="center" direction="column">
                 <Flex w="80vw" m="2em" direction="row" gap="1em">
                     <AddButton handleFetch={handleFetch} />
-                    <Button colorScheme="green" variant='outline' onClick={handleFetch} leftIcon={<RepeatIcon />}>Refrescar</Button>
+                    <Button colorScheme="teal" variant='outline' onClick={handleFetch} leftIcon={<RepeatIcon />}>Refrescar</Button>
                     <PdfButton2 fileName='ReporteEstudiantes' id='pdf'/>
                 </Flex>
 
@@ -55,7 +55,7 @@ export default function StudentsTable({ initialStudents, initialError }) {
                     <Box id="pdf">
                         <Box  overflowX='auto' w="80vw" border="1px solid lightgray" borderRadius="8px" boxShadow='lg'>
                             
-                            <Table variant="striped" size="sm" colorScheme="teal">
+                            <Table variant="simple" size="sm" >
                                 <TableCaption>Tabla de estudiantes</TableCaption>
                                 <Thead>
                                     <Tr >

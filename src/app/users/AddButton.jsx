@@ -68,7 +68,7 @@ export default function AddButton({ handleFetch }) {
 
     return (
         <>
-            <Button onClick={onOpen} colorScheme='green' leftIcon={<AddIcon />}>Crear</Button>
+            <Button variant='outline' onClick={onOpen} colorScheme='green' leftIcon={<AddIcon />}>Crear</Button>
 
             <Modal isOpen={isOpen} onClose={onClose} initialFocusRef={initialRef} isCentered>
                 <ModalOverlay />

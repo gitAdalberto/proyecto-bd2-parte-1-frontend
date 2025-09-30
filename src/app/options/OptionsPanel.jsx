@@ -49,12 +49,13 @@ export default function OptionsPanel({  }) {
         </Box>
         <Box>
           <Text mb='1em' fontWeight='medium'>Cerrar sesión</Text>
-          <Button colorScheme="blue" leftIcon={<MdLogout />} onClick={handleLogout}>Cerrar</Button>
+          <Button variant='outline' colorScheme="blue" leftIcon={<MdLogout />} onClick={handleLogout}>Cerrar</Button>
         </Box>
         <Box w='100%'>
           <Divider orientation="horizontal" />
         </Box>
         <Box>
+          <Heading as='h3' size='lg' mb='1em'>Opciones de interfaz</Heading>
           <Text mb='1em' fontWeight='medium'>Cambiar Tema</Text>
           <ColorMode />
         </Box>

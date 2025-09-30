@@ -1,5 +1,5 @@
 import Provider from "@/components/Provider";
-import { Toaster } from "sonner";
+import "./styles.css"
 
 export const metadata = {
   title: "Proyecto P1",
@@ -10,9 +10,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body>
-        
         <Provider>{children}</Provider>
-        <Toaster />
       </body>
     </html>
   );

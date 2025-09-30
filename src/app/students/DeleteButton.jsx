@@ -40,7 +40,7 @@ export default function DeleteButton({studentId, handleFetch}) {
     }
     return (
         <>
-            <Button onClick={onOpen} colorScheme='red'><DeleteIcon color="white"/></Button>
+            <Button variant='outline' onClick={onOpen} colorScheme='red' iconSpacing='0' leftIcon={<DeleteIcon/>}></Button>
 
             <Modal isOpen={isOpen} onClose={onClose}>
                 <ModalOverlay />
