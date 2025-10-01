@@ -29,7 +29,6 @@ export default async function page() {
 
     //recoger contenido del log
     const logs = await getLogs();
-    console.log(logs);
   return (
     <SidebarWrapper>
       <AccessTabs initialData={data} initalError={error} logs={logs}></AccessTabs>

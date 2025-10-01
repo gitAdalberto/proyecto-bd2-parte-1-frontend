@@ -136,7 +136,7 @@ export default function FilterAccessComponent({ data }) {
             <Modal isOpen={isOpen} onClose={onClose} initialFocusRef={initialRef} isCentered scrollBehavior="inside">
                 <ModalOverlay />
                 <ModalContent>
-                    <ModalHeader>Modal Title</ModalHeader>
+                    <ModalHeader>Accesos con filtros</ModalHeader>
                     <ModalCloseButton />
                     <ModalBody pb={6}>
                         <FormControl>

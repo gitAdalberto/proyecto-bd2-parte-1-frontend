@@ -14,9 +14,12 @@ import {
     Input,
     Box,
     useToast,
-    Select
+    Select,
+    InputGroup,
+    InputRightElement
 } from '@chakra-ui/react'
 import { AddIcon } from '@chakra-ui/icons'
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useRef, useState } from 'react';
 import { createUser } from '@/actions/user';
 export default function AddButton({ handleFetch }) {
@@ -29,6 +32,7 @@ export default function AddButton({ handleFetch }) {
     const [password2, setPassword2] = useState("");
     const [email, setEmail] = useState("");
     const [role, setRole] = useState("");
+    const [show, setShow] = useState(false);
 
     const createToast = (description, status) => {
         toast({
@@ -40,12 +44,13 @@ export default function AddButton({ handleFetch }) {
             position: 'top-right'
         })
     }
-    const clean = () =>{
+    const clean = () => {
         setUser("");
         setEmail("");
         setRole("");
         setPassword1("");
         setPassword2("");
+        setShow(false);
     }
     const handleClick = async () => {
         const response = await createUser(
@@ -94,17 +99,43 @@ export default function AddButton({ handleFetch }) {
                             </FormControl>
                             <FormControl>
                                 <FormLabel>Contraseña</FormLabel>
-                                <Input placeholder='Contraseña' type='password' value={password1} onChange={(e) => setPassword1(e.target.value)} />
+                                <InputGroup>
+                                    <Input placeholder='Contraseña' type={show ? "text" : "password"} value={password1} onChange={(e) => setPassword1(e.target.value)} />
+                                    <InputRightElement>
+                                        <Button
+                                            onClick={() => {
+                                                setShow(!show);
+                                            }}
+                                            variant="ghost"
+                                            iconSpacing={0}
+                                            leftIcon={show ? <FaEyeSlash /> : <FaEye />}
+                                        >
+                                        </Button>
+                                    </InputRightElement>
+                                </InputGroup>
                             </FormControl>
                             <FormControl>
                                 <FormLabel>Repetir Contraseña</FormLabel>
-                                <Input placeholder='Repetir Contraseña' type='password' value={password2} onChange={(e) => setPassword2(e.target.value)} />
+                                <InputGroup>
+                                    <Input placeholder='Repetir Contraseña' type={show ? "text" : "password"} value={password2} onChange={(e) => setPassword2(e.target.value)} />
+                                    <InputRightElement>
+                                        <Button
+                                            onClick={() => {
+                                                setShow(!show);
+                                            }}
+                                            variant="ghost"
+                                            iconSpacing={0}
+                                            leftIcon={show ? <FaEyeSlash /> : <FaEye />}
+                                        >
+                                        </Button>
+                                    </InputRightElement>
+                                </InputGroup>
                             </FormControl>
                         </ModalBody>
 
                         <ModalFooter>
                             <Button colorScheme='green' mr={3} onClick={handleClick}>Agregar</Button>
-                            <Button colorScheme='blue' onClick={()=>{
+                            <Button colorScheme='blue' onClick={() => {
                                 onClose();
                                 clean();
                             }}>Cerrar</Button>
