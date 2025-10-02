@@ -1,7 +1,7 @@
 import SidebarWrapper from "@/components/SidebarWrapper";
 import { verifySession } from "../lib/dal";
 import { redirect } from "next/navigation";
-import { getTransactions } from "@/actions/transactions";
+import { getFilterTransactions, getTransactions } from "@/actions/transactions";
 import TransactionPanel from "./TransactionsPanel";
 import { handleTitle } from "@/actions/user";
 
@@ -12,20 +12,14 @@ export default async function page() {
   const userRole = session?.role;
   if (userRole !== "admin") redirect("/dashboard");
 
-  //fetch
-  let data = null;
-  let error = null;
+  
 
-  const response = await getTransactions();
-  if (response.success) {
-    data = response.data;
-  } else {
-    error = response.data;
-  }
+  const response = await getFilterTransactions("mocachin", null, null, null, null, null);
+  
 
   return (
     <SidebarWrapper>
-      <TransactionPanel initialData={data} initialError={error}/>
+      <TransactionPanel response={response}/>
     </SidebarWrapper>
   );
 }

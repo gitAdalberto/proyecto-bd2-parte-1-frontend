@@ -20,6 +20,8 @@ import { getUsers } from "@/actions/user";
 import AddButton from "./AddButton";
 import SwitchUser from "./SwitchUser";
 import PdfButton2 from "@/components/PdfButton2";
+import PdfButton3 from "@/components/PdfButton3";
+import ShowInfo from "./ShowInfo";
 
 export default function UsersPanel({ initialUsers, initialError }) {
     const [users, setUsers] = useState(initialUsers);
@@ -43,11 +45,21 @@ export default function UsersPanel({ initialUsers, initialError }) {
     return (
         <Flex w='100%' mt='0.5em'>
             <Flex align='center' justifyContent='center' direction='column' m='2em'>
-                <Heading fontWeight='normal'>Panel de Usuarios</Heading>
+                <Heading fontWeight='normal' mb='1em'>Panel de Usuarios</Heading>
                 <Flex w='80vw'  mb='2em' direction='row' gap='1em'>
                     <AddButton handleFetch={handleFetch} />
                     <Button colorScheme="teal" variant='outline' onClick={handleFetch} leftIcon={<RepeatIcon />}>Refrescar</Button>
-                    <PdfButton2 fileName="ReporteUsuarios" id='pdf'/>
+                    <PdfButton3 fileName="ReporteUsuarios" headers={[["ID","Usuario","Correo","Rol", "Estado"]]}
+                        rows={
+                            users.map((u)=>[
+                                u.id,
+                                u.usuario,
+                                u.correo,
+                                u.rol,
+                                u.estado ? "habilitado" : "deshabilitado"
+                            ])
+                        }
+                    />
                 </Flex>
                 {pending && <Flex h='100vh'><Spinner size="xl" /></Flex>}
                 {error && <p style={{ color: "red" }}>{error}</p>}
@@ -58,6 +70,7 @@ export default function UsersPanel({ initialUsers, initialError }) {
                                 <TableCaption>Tabla de usuarios</TableCaption>
                                 <Thead>
                                     <Tr>
+                                        <Th></Th>
                                         <Th>Id</Th>
                                         <Th>Usuario</Th>
                                         <Th>Correo</Th>
@@ -68,6 +81,9 @@ export default function UsersPanel({ initialUsers, initialError }) {
                                 <Tbody>
                                     {users.map((u) => (
                                         <Tr key={u.id}>
+                                            <Td>
+                                                <ShowInfo usuario={u.usuario} correo={u.correo} rol={u.rol} estado={u.estado} />
+                                            </Td>
                                             <Td>{u.id}</Td>
                                             <Td>{u.usuario}</Td>
                                             <Td>{u.correo}</Td>

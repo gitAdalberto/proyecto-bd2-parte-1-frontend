@@ -8,23 +8,23 @@ import {
     Flex,
     Heading
 } from '@chakra-ui/react'
-import AccessPanel from './AccessPanel'
 import LogPanel from './LogPanel'
-export default function AccessTabs({ initialData, initialError, logs }) {
+import FilterAccessComponent from './FilterAccessComponent'
+export default function AccessTabs({ initialData, logs }) {
     return (
-        <Flex m='2em' direction='column' >
+        <Flex m='2em' direction='column' minh='100vh'>
             <Flex  justifyContent='center'>
                 <Heading  fontWeight='normal'>Panel de Accesos</Heading>
             </Flex>
-            <Tabs>
+            <Tabs display="flex" flexDirection="column" flex="1">
                 <TabList>
                     <Tab>Tabla de Accesos</Tab>
                     <Tab>Archivo Log</Tab>
                 </TabList>
 
-                <TabPanels>
-                    <TabPanel>
-                        <AccessPanel initialData={initialData} initialError={initialError}></AccessPanel>
+                <TabPanels flex="1" >
+                    <TabPanel h="100%" display="flex" flexDirection="column">
+                        <FilterAccessComponent data={initialData}/>
                     </TabPanel>
                     <TabPanel>
                         <LogPanel logs={logs.data}></LogPanel>

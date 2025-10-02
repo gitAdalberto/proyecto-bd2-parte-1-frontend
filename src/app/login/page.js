@@ -100,12 +100,12 @@ export default function ClientPage() {
             </InputRightElement>
           </InputGroup>
         </FormControl>
-        <Box mb={4}>
+        <Flex mb={4} aling='center' justifyContent='center' >
           <ReCAPTCHA
             sitekey={process.env.NEXT_PUBLIC_SITE_KEY}
             onChange={handleVerify}
           />
-        </Box>
+        </Flex>
         <Button colorScheme="teal" w="full" mb={4} type="submit">
           Entrar
         </Button>

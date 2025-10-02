@@ -10,7 +10,7 @@ export default function LogPanel({ logs }) {
             <Flex
                 direction="column"
                 w="100%"
-                maxH="400px"
+                maxH="300px"
                 overflowY="auto"
                 p={4}
                 border="1px solid gray"

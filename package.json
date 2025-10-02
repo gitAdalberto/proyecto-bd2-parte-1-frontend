@@ -17,6 +17,8 @@
     "framer-motion": "^12.23.16",
     "html2pdf.js": "^0.12.1",
     "jose": "^6.1.0",
+    "jspdf": "^3.0.3",
+    "jspdf-autotable": "^5.0.2",
     "next": "15.5.3",
     "react": "19.1.0",
     "react-dom": "19.1.0",

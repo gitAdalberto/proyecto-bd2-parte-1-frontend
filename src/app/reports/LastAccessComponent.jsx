@@ -1,5 +1,7 @@
+import { dateFormat } from "@/actions/dateformat";
 import PdfButton from "@/components/PdfButton";
 import PdfButton2 from "@/components/PdfButton2";
+import PdfButton3 from "@/components/PdfButton3";
 import { Box, Button, Flex, Spinner, Table, TableCaption, Tbody, Td, Th, Thead, Tr } from "@chakra-ui/react";
 import { useState, useTransition } from "react";
 export default function LastAccessComponent({ data, title }) {
@@ -11,7 +13,17 @@ export default function LastAccessComponent({ data, title }) {
         <Flex w='100%' direction='column'>
             <Flex w='100%' align='flex-start' gap='1em'>
                 {/*<Button colorScheme="green" variant='outline' leftIcon={<RepeatIcon />}>Refrescar</Button>*/}
-                <PdfButton2 fileName="ReporteUltimoAccesoExitoso" id='pdf-1'/>
+                <PdfButton3
+                    fileName="ReporteUltimoAccesoExitoso"
+                    headers={[["Usuario", "Correo", "Ultima conexion"]]}
+                    rows={
+                        newData.map((s) => [
+                            s.usuario,
+                            s.correo,
+                            dateFormat(s.ultimaConexion)
+                        ])
+                    }
+                />
             </Flex>
             <Flex w='100%' mt='2em' align='center' justifyContent='center'>
                 {pending && <Flex h='100vh'><Spinner size="xl" /></Flex>}
@@ -32,7 +44,7 @@ export default function LastAccessComponent({ data, title }) {
                                     <Tr key={s.id}>
                                         <Td>{s.usuario}</Td>
                                         <Td>{s.correo}</Td>
-                                        <Td>{s.ultimaConexion}</Td>
+                                        <Td>{dateFormat(s.ultimaConexion)}</Td>
                                     </Tr>
                                 ))}
                             </Tbody>

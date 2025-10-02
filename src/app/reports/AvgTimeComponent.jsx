@@ -1,5 +1,6 @@
 import PdfButton from "@/components/PdfButton";
 import PdfButton2 from "@/components/PdfButton2";
+import PdfButton3 from "@/components/PdfButton3";
 import { RepeatIcon } from "@chakra-ui/icons";
 import { Box, Button, Flex, Spinner, Table, TableCaption, Tbody, Td, Th, Thead, Tr } from "@chakra-ui/react";
 import { useState, useTransition } from "react";
@@ -12,7 +13,15 @@ export default function AvgTimeComponent({ data }) {
         <Flex w='100%' direction='column'>
             <Flex w='100%' align='flex-start' gap='1em'>
                 {/*<Button colorScheme="green" variant='outline' leftIcon={<RepeatIcon />}>Refrescar</Button>*/}
-                <PdfButton2 fileName="ReporteTiempoPromedio" id='pdf-2'/>
+                <PdfButton3 fileName="ReporteTiempoPromedio"
+                    headers={[["Usuario", "Tiempo promedio (m)"]]}
+                    rows={
+                        newData.map((s) => [
+                            s.usuario,
+                            s.PromedioMinutos
+                        ])
+                    }
+                />
             </Flex>
             <Flex w='100%' mt='2em' align='center' justifyContent='center'>
                 {pending && <Flex h='100vh'><Spinner size="xl" /></Flex>}

@@ -6,6 +6,7 @@ import AccessPanel from "./AccessPanel";
 import { handleTitle } from "@/actions/user";
 import AccessTabs from "./AccessTabs";
 import { getLogs } from "@/actions/log";
+import { getFilterAccess } from "@/actions/reports";
 
 export default async function page() {
   const session = await verifySession();
@@ -18,20 +19,13 @@ export default async function page() {
     }
 
     //fecth
-    let data = null;
-    let error = null;
-    const response = await getAccess();
-    if (response.success) {
-        data = response.data;
-    } else {
-        error = response.data;
-    }
+    const filterAccess = await getFilterAccess(null, null, null, null, null);
 
     //recoger contenido del log
     const logs = await getLogs();
   return (
     <SidebarWrapper>
-      <AccessTabs initialData={data} initalError={error} logs={logs}></AccessTabs>
+      <AccessTabs initialData={filterAccess} logs={logs}></AccessTabs>
     </SidebarWrapper>
   );
 }
