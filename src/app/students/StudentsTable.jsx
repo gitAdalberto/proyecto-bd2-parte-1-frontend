@@ -29,7 +29,7 @@ import { dateFormat } from "@/actions/dateformat";
 
 
 
-export default function StudentsTable({ initialStudents, initialError }) {
+export default function StudentsTable({ initialStudents, initialError, role }) {
 
     const [students, setStudents] = useState(initialStudents || []);
     const [error, setError] = useState(initialError || null);
@@ -48,7 +48,7 @@ export default function StudentsTable({ initialStudents, initialError }) {
 
     return (
         <Flex w='100%'>
-            <Flex align="center" justifyContent="center" direction="column" m="2em">
+            <Flex align="center" justifyContent="center" direction="column" m="2em" w='100%'>
                 <Heading fontWeight='normal'>Panel de Estudiantes</Heading>
                 <Flex w="80vw" direction="row" gap="1em" mb='2em'>
                     <AddButton handleFetch={handleFetch} />
@@ -80,7 +80,7 @@ export default function StudentsTable({ initialStudents, initialError }) {
                                         <Th>correo</Th>
                                         <Th>telefono</Th>
                                         <Th>registro</Th>
-                                        <Th>Acciones</Th>
+                                        { role === 'admin' && <Th>Acciones</Th>}
                                     </Tr>
                                 </Thead>
                                 <Tbody>
@@ -92,10 +92,12 @@ export default function StudentsTable({ initialStudents, initialError }) {
                                             <Td>{s.correo}</Td>
                                             <Td>{s.telefono}</Td>
                                             <Td>{dateFormat(s.fechaRegistro)}</Td>
-                                            <Td display="flex" gap="1em">
+                                            { role === 'admin' && 
+                                                <Td display="flex" gap="1em">
                                                 <EditButton {...s} handleFetch={handleFetch} />
                                                 <DeleteButton studentId={s.id} handleFetch={handleFetch} />
                                             </Td>
+                                            }
                                         </Tr>
                                     ))}
                                 </Tbody>

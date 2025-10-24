@@ -12,8 +12,9 @@ const roleRoutes = {
     "/transactions",
     "/reports",
     "/unauthorized",
-  ], // Rutas que puede acceder admin
-  secretaria: ["/", "/students", "/dashboard", "/options", "/unauthorized"], // Rutas que puede acceder secretaria
+    "/shopping/categories"
+  ], 
+  secretaria: ["/", "/students", "/dashboard", "/options", "/unauthorized"],
 };
 
 const publicRoutes = ["/login", "/forgot-password", "/reset-password"];

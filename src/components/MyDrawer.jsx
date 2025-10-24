@@ -9,47 +9,29 @@ import {
     DrawerContent,
     DrawerCloseButton,
     Button,
-    Input,
-    Flex,
-    useToast
+    Flex
 } from "@chakra-ui/react"
 import { useRef } from "react"
+
 import { HamburgerIcon } from "@chakra-ui/icons";
 import { FaGear, FaBookOpenReader, FaNewspaper } from "react-icons/fa6";
-import { FaUser, FaDatabase, FaHome } from "react-icons/fa";
+import { FaUser, FaDatabase, FaHome, FaProductHunt, FaShoppingCart } from "react-icons/fa";
 import { BiSolidDoorOpen } from "react-icons/bi";
-import { MdLogout } from "react-icons/md";
+import { MdCategory, MdInventory } from "react-icons/md";
+
+
+import { Divider } from "@chakra-ui/react";
 import Link from "next/link";
-import { logout, verifyLogout } from "@/actions/login";
 import ColorMode from "./ColorMode";
 import LogOutButton from "./LogOutButton";
+import DrawerButton from "./DrawerButton";
 
 export default function MyDrawer({ isAdmin }) {
     const { isOpen, onOpen, onClose } = useDisclosure();
     const btnRef = useRef();
-    const toast = useToast();
-    const createToast = (description, status) => {
-        toast({
-            title: "Cerrar sesion",
-            description: description,
-            status: status,
-            duration: 5000,
-            isClosable: true,
-            position: "bottom",
-        });
-    };
-    const handleLogout = async () => {
-        const response = await verifyLogout();
-        if (response.success) {
-            createToast(response.data?.mensaje, "success");
-            await logout();
-        } else {
-            createToast(response.data?.mensaje, "error");
-        }
 
-    };
     return (
-        <Flex ml='0.5em' mt='0.5em'>
+        <Flex>
             <Button variant='unstyled' onClick={onOpen} leftIcon={<HamburgerIcon />} iconSpacing={0}></Button>
 
             <Drawer
@@ -66,12 +48,17 @@ export default function MyDrawer({ isAdmin }) {
 
                     <DrawerBody>
                         <Flex w='100%' direction='column' gap='1em'>
-                            <Button as={Link} href='/dashboard' leftIcon={<FaHome />} colorScheme="teal" variant='outline' justifyContent='space-'>Dashboard</Button>
-                            <Button as={Link} href='/students' leftIcon={<FaBookOpenReader />} colorScheme="teal" variant='outline' justifyContent='space-'>Estudiantes</Button>
-                            {isAdmin && <Button as={Link} href='/users' leftIcon={<FaUser />} colorScheme="teal" variant='outline' justifyContent='space-'>Usuarios</Button>}
-                            {isAdmin && <Button as={Link} href='/access' leftIcon={<BiSolidDoorOpen />} colorScheme="teal" variant='outline' justifyContent='space-'>Accesos</Button>}
-                            {isAdmin && <Button as={Link} href='/transactions' leftIcon={<FaDatabase />} colorScheme="teal" variant='outline' justifyContent='space-'>Transacciones</Button>}
-                            {isAdmin && <Button as={Link} href='/reports' leftIcon={<FaNewspaper />} colorScheme="teal" variant='outline' justifyContent='space-'>Reportes</Button>}
+                            <DrawerButton href='/dashboard' leftIcon={<FaHome />} >Dashboard</DrawerButton>
+                            <DrawerButton href='/students' leftIcon={<FaBookOpenReader />} >Estudiantes</DrawerButton>
+                            {isAdmin && <DrawerButton href='/users' leftIcon={<FaUser />} >Usuarios</DrawerButton>}
+                            {isAdmin && <DrawerButton href='/access' leftIcon={<BiSolidDoorOpen />} >Accesos</DrawerButton>}
+                            {isAdmin && <DrawerButton href='/transactions' leftIcon={<FaDatabase />} >Transacciones</DrawerButton>}
+                            {isAdmin && <DrawerButton href='/reports' leftIcon={<FaNewspaper />} >Reportes</DrawerButton>}
+                            <Divider orientation='horizontal' />
+                            <DrawerButton href='/shopping/categories' leftIcon={<MdCategory />} >Categorías</DrawerButton>
+                            <DrawerButton href='/dashboard' leftIcon={<FaProductHunt />} >Productos</DrawerButton>
+                            <DrawerButton href='/dashboard' leftIcon={<MdInventory />} >Inventario</DrawerButton>
+                            <DrawerButton href='/dashboard' leftIcon={<FaShoppingCart />} >Ventas</DrawerButton>
                         </Flex>
                     </DrawerBody>
 

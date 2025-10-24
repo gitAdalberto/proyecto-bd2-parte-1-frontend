@@ -8,12 +8,8 @@ export default function SidebarLayout({ children, isAdmin }) {
   return (
     <Flex w="100%" minH="100vh">
       <Box
-        as="aside"
-        position="sticky"
-        top="0"
-        h="100vh"           
-        flexShrink={0}      
-        zIndex={1}          
+        position='fixed'
+        rigth ='1rem'        
       >
         <MyDrawer isAdmin={isAdmin} />
       </Box>

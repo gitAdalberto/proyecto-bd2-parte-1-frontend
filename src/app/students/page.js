@@ -22,6 +22,6 @@ export default async function Students() {
   }
 
   return <SidebarWrapper>
-    <StudentsTable initialStudents={response.data} initialError={error}/>
+    <StudentsTable initialStudents={response.data} initialError={error} role={role} />
   </SidebarWrapper>
 }

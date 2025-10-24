@@ -49,7 +49,6 @@ export const createStudent = async (formData) => {
       userId: userId,
       userRole: userRole,
     });
-    console.log("hola mundo");
     return { success: true, data: response?.data, status: response?.status };
   } catch (err) {
     console.log("mensaje", err.response?.data);

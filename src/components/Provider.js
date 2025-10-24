@@ -6,11 +6,11 @@ import theme from "./theme";
 
 export default function Provider({ children }) {
   return (
-    <CacheProvider>
+    
       <ChakraProvider theme={theme}>
         <ColorModeScript initialColorMode={theme.config.initialColorMode} />
         {children}
       </ChakraProvider>
-    </CacheProvider>
+    
   );
 }

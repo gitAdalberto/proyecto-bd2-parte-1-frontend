@@ -3,7 +3,6 @@ import { verifySession } from "../lib/dal";
 import { redirect } from "next/navigation";
 import { getFilterTransactions, getTransactions } from "@/actions/transactions";
 import TransactionPanel from "./TransactionsPanel";
-import { handleTitle } from "@/actions/user";
 
 export default async function page() {
   const session = await verifySession();
@@ -14,7 +13,7 @@ export default async function page() {
 
   
 
-  const response = await getFilterTransactions("mocachin", null, null, null, null, null);
+  const response = await getFilterTransactions(null, null, null, null, null, null);
   
 
   return (
