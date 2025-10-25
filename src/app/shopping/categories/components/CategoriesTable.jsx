@@ -8,7 +8,9 @@ import {
     TableContainer,
 } from '@chakra-ui/react'
 import DeleteButton from './DeleteButton'
+import EditButton from './EditButton'
 export default function CategoriesTable({data, handleRefresh}) {
+    console.log(data);
     return (
         <TableContainer borderRadius="lg">
             <Table variant='borderY' >                
@@ -29,8 +31,9 @@ export default function CategoriesTable({data, handleRefresh}) {
                                 <Td>{d.descripcion}</Td>
                                 <Td>{d.fechaCreacion}</Td>
                                 <Td>{d.estado ? "Habilitada" : "Deshabilitada"}</Td>
-                                <Td>
-                                    <DeleteButton id={d.id} handleRefresh={handleRefresh}/>
+                                <Td display='flex' flexDirection='row' gap='0.5em'>
+                                    <EditButton {...d} handleRefresh={handleRefresh}/>
+                                    <DeleteButton id={d.id} handleRefresh={handleRefresh}/>                                    
                                 </Td>
                             </Tr>
                         ))

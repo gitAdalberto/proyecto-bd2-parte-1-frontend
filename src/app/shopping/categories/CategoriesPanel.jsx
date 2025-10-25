@@ -32,7 +32,7 @@ export default function CategoriesPanel({ response }) {
                 <RefreshButton handleRefresh={handleRefresh} />
             </Flex>
             {/*Tabla */}
-            {pending && <Flex h='100vh' justifyContent='center'><Spinner size="xl" /></Flex>}
+            {pending && <Flex w='100%' justifyContent='center'><Spinner size="xl" /></Flex>}
             {!pending && data.length > 0 && 
                 <CategoriesTable data={data} handleRefresh={handleRefresh}/>
             }

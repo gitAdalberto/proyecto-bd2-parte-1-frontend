@@ -32,6 +32,38 @@ export const createCategory = async(category) => {
     }
 };
 
+
+export const editCategory = async(id, category) => {
+    //Verificamos la sesion
+    const session = await verifySession();
+    if (!session) return null;
+
+    //recogemos el rol y id de la session
+    const userId = session?.userId;
+    const userRole = session?.role;
+
+    //recogemos propiedades
+    const nombre = category.nombre;
+    const descripcion = category.descripcion;
+    const estado = category.estado;
+    
+    try {
+        const response = await api.put(`/categorias/${id}`, {
+            nombre: nombre,
+            descripcion: descripcion,
+            estadoCategoria: estado,
+            userRole: userRole
+        });
+        return { success: true, data: response?.data, status: response?.status };
+    } catch (error) {
+        return {
+            success: false,
+            data: err.response?.data,
+            status: err.response?.status,
+        };
+    }
+};
+
 export const fetchCategories = async () => {
     //Verificamos la sesion
     const session = await verifySession();

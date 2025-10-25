@@ -1,29 +1,32 @@
 import { Button, FormControl, FormLabel, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, useDisclosure, useToast } from "@chakra-ui/react"
-import { AddIcon } from "@chakra-ui/icons"
+import { EditIcon } from "@chakra-ui/icons"
 import { useState } from "react";
-import { createCategory } from "../actions/categories";
+import { editCategory } from "../actions/categories";
 
-export default function AddButton({handleRefresh}) {
+export default function EditButton({id, nombre, descripcion, estado, handleRefresh}) {
     const toast = useToast();
     const { isOpen, onOpen, onClose } = useDisclosure();
     const [category, setCategory] = useState({
-        nombre: "",
-        descripcion: ""
+        nombre: nombre,
+        descripcion: descripcion,
+        estado: estado
     });
 
     const handleChange = (e) =>{
-        setCategory({
-            ...category,
-             [e.target.name]: e.target.value
-        })
+        setCategory((prev) => ({
+            ...prev,
+             [e.target.name]: e.target.value,
+        }));
     };
 
-    const handleCreate = async () => {
-        const response = await createCategory(category);
+    const handleEdit = async () => {
+        console.log({category});
+        
+        const response = await editCategory(id, category);
         console.log(response);
         if (response.success) {
             toast({
-                title:"Categoria creada",
+                title:"Categoria editada",
                 status: 'success',
                 isClosable: true,
                 duration: 5000
@@ -45,7 +48,7 @@ export default function AddButton({handleRefresh}) {
 
     return (
         <>
-            <Button onClick={onOpen} variant='solid' colorScheme="green" leftIcon={<AddIcon />} >Crear</Button>
+            <Button onClick={onOpen} variant='solid' colorScheme="blue" leftIcon={<EditIcon />} iconSpacing={0} ></Button>
 
             <Modal
                 isOpen={isOpen}
@@ -53,24 +56,24 @@ export default function AddButton({handleRefresh}) {
             >
                 <ModalOverlay />
                 <ModalContent>
-                    <ModalHeader>Añadir Categoria</ModalHeader>
+                    <ModalHeader>Editar Categoria</ModalHeader>
                     <ModalCloseButton />
                     <ModalBody pb={6}>
                         <FormControl>
                             <FormLabel>Nombre</FormLabel>
-                            <Input placeholder='Nombre' name="nombre" onChange={handleChange}/>
+                            <Input placeholder='Nombre' name="nombre" value={category?.nombre} onChange={handleChange}/>
                         </FormControl>
 
                         <FormControl mt={4}>
                             <FormLabel>Descripcion</FormLabel>
-                            <Input placeholder='Descripcion' name="descripcion" onChange={handleChange}/>
+                            <Input placeholder='Descripcion' name="descripcion"  value={category?.descripcion} onChange={handleChange}/>
                         </FormControl>
 
                     </ModalBody>
 
                     <ModalFooter>
-                        <Button colorScheme='blue' mr={3} onClick={()=>handleCreate()}>
-                            Imprimir
+                        <Button colorScheme='blue' mr={3} onClick={()=>handleEdit()}>
+                            Guardar
                         </Button>
                         <Button onClick={onClose}>Cancel</Button>
                     </ModalFooter>
