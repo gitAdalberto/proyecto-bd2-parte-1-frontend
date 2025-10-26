@@ -161,3 +161,47 @@ export const deleteProductCategory = async (id) => {
         throw new Error(error.response?.data?.mensaje || "Ha ocurrido un error");
     }
 }
+
+export const fetchCategories = async () =>{
+    //Verificamos la sesion
+    const session = await verifySession();
+    if (!session) return null;
+
+    //recogemos el rol y id de la session
+    const userRole = session?.role;
+
+    try {
+        const response = await api.get('/categorias',{
+            data:{
+                userRole: userRole
+            }
+        });
+        return response.data;
+    } catch (error) {
+        throw new Error(error.response?.data?.mensaje || "Ha ocurrido un error");
+    }
+};
+
+export const postProductCategory = async (myObj) =>{
+    //Verificamos la sesion
+    const session = await verifySession();
+    if (!session) return null;
+
+    //recogemos el rol y id de la session
+    const userRole = session?.role;
+
+    //recogemos propiedades
+    const idProducto = myObj.productId;
+    const idCategoria = myObj.categoryId;
+
+    try {
+        const response = await api.post('/productos/categorias',{
+            idProducto: idProducto,
+            idCategoria: idCategoria,
+            userRole: userRole
+        });
+        return response.data;
+    } catch (error) {
+        throw new Error(error.response?.data?.mensaje || "Ha ocurrido un error");
+    }
+};

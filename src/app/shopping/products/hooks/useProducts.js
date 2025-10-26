@@ -1,6 +1,6 @@
 
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { deleteProduct, deleteProductCategory, fetchProductCategories, fetchProducts, postProduct, putProduct } from "../actions/products";
+import { deleteProduct, deleteProductCategory, fetchCategories, fetchProductCategories, fetchProducts, postProduct, postProductCategory, putProduct } from "../actions/products";
 import { useToast } from "@chakra-ui/react";
 export function useProducts() {
     return useQuery({
@@ -135,3 +135,40 @@ export function useDeleteProductCategory(onClose){
     });
 }
 
+export function useCategories() {
+    return useQuery({
+        queryKey: ["categories"],
+        queryFn: fetchCategories,
+    });
+};
+
+
+export function usePostProductCategory(onClose){
+    const queryClient = useQueryClient();
+    const toast = useToast();
+    return useMutation({
+        mutationFn: postProductCategory,
+        onSuccess: (data) =>{
+            console.log(data);
+            queryClient.invalidateQueries({ queryKey:['product']});
+            toast({
+                title: "Categoria añadida al producto",
+                description:data?.mensaje || "no hay mensaje",
+                isClosable: true,
+                duration: 3000,
+                status: 'success'
+            });
+            onClose();
+        },
+        onError: (error) => {
+            console.error("Error al agregar categoria al producto:", error.message);
+            toast({
+                title: "Error",
+                description: error.message,
+                isClosable: true,
+                duration: 3000,
+                status: 'error'
+            })
+        },
+    });
+}

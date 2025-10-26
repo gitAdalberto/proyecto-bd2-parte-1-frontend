@@ -1,20 +1,20 @@
-import { AddIcon, ViewIcon } from "@chakra-ui/icons"
+import { AddIcon } from "@chakra-ui/icons"
 import { Button, List, ListItem, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Spinner, Text, useDisclosure } from "@chakra-ui/react"
-import { useProductCategories } from "../hooks/useProducts";
+import { useCategories, useProductCategories } from "../hooks/useProducts";
 import PopOverCategories from "./PopOverCategories";
-import ModalAddCategories from "./ModalAddCategories";
+import ButtonAddCategory from "./ButtonAddCategory";
 
-export default function ModalCategories({ productId }) {
+export default function ModalAddCategories({ productId }) {
     const { isOpen, onOpen, onClose } = useDisclosure();
-    const { data, isLoading, isError, error } = useProductCategories(productId);
+    const { data, isLoading, isError, error } = useCategories();
     return (
         <>
-            <Button onClick={onOpen} iconSpacing={0} leftIcon={<ViewIcon />} colorScheme="gray" variant='solid'/>
+            <Button onClick={onOpen} leftIcon={<AddIcon />} colorScheme="green" variant='solid'>Agregar</Button>
 
             <Modal isOpen={isOpen} onClose={onClose} isCentered>
                 <ModalOverlay />
                 <ModalContent>
-                    <ModalHeader>Categorias del producto</ModalHeader>
+                    <ModalHeader>Seleeccione Categoria a agregar</ModalHeader>
                     <ModalCloseButton />
                     <ModalBody>
                         {isLoading && <Spinner/>}
@@ -23,14 +23,13 @@ export default function ModalCategories({ productId }) {
                             {!data || data.length == 0 && <ListItem>Sin categorias</ListItem>}
                             {data && data.map((d) => (
                                 <ListItem key={d.id} >
-                                    <PopOverCategories id={d.id} >{d.nombre}</PopOverCategories>
+                                    <ButtonAddCategory onClose={onClose} categoryId={d.id} productId={productId} >{d.nombre}</ButtonAddCategory>
                                 </ListItem>)
                             )}
                         </List>
                     </ModalBody>
 
                     <ModalFooter>
-                        <ModalAddCategories productId={productId}/>
                         <Button variant='ghost' onClick={onClose}>Cerrar</Button>
                     </ModalFooter>
                 </ModalContent>
