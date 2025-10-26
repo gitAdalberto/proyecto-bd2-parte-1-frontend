@@ -1,4 +1,4 @@
-import { Button, FormControl, FormLabel, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, useDisclosure, useToast } from "@chakra-ui/react"
+import { Button, FormControl, FormLabel, Input, InputGroup, InputLeftElement, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, useDisclosure, useToast } from "@chakra-ui/react"
 import { AddIcon } from "@chakra-ui/icons"
 import { useState } from "react";
 import { usePostProduct } from "../hooks/useProducts";
@@ -59,12 +59,22 @@ export default function AddButton({}) {
 
                         <FormControl mt={4}>
                             <FormLabel>Precio Venta</FormLabel>
-                            <Input placeholder='Precio Venta' name="precioVenta" onChange={handleChange}/>
+                            <InputGroup>
+                                <InputLeftElement pointerEvents='none'>
+                                    Q
+                                </InputLeftElement>
+                                <Input placeholder='Precio Venta' name="precioVenta" onChange={handleChange}/>
+                            </InputGroup>
                         </FormControl>
 
                         <FormControl mt={4}>
                             <FormLabel>Precio Costo</FormLabel>
-                            <Input placeholder='Precio Costo' name="precioCosto" onChange={handleChange}/>
+                            <InputGroup>
+                                <InputLeftElement pointerEvents='none' >
+                                    Q
+                                </InputLeftElement>
+                                <Input placeholder='Precio Costo' name="precioCosto" onChange={handleChange}/>
+                            </InputGroup>
                         </FormControl>
 
                     </ModalBody>

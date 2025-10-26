@@ -115,3 +115,49 @@ export const putProduct = async (product) =>{
         throw new Error(error.response?.data?.mensaje || "Ha ocurrido un error");
     }
 }
+
+export const fetchProductCategories = async (productId) => {
+    //Verificamos la sesion
+    const session = await verifySession();
+    if (!session) return null;
+
+    //recogemos el rol y id de la session
+    const userRole = session?.role;
+    const id = productId.queryKey[1];
+    //fetch
+    try {
+        const response = await api.get(`/producto/categorias/${parseInt(id)}`,{
+            data:{
+                userRole: userRole
+            }
+        });
+        return response.data;
+    } catch (error) {
+        throw new Error(error.response?.data?.mensaje || "Ha ocurrido un error");
+    }
+}
+
+export const deleteProductCategory = async (id) => {
+    //Verificamos la sesion
+    const session = await verifySession();
+    if (!session) return null;
+
+    //recogemos el rol y id de la session
+    const userRole = session?.role;
+
+    //recogemos propiedades
+    console.log(id);
+    const newId = parseInt(id);
+    
+    //fetch
+    try {
+        const response = await api.delete(`/productos/categorias/${newId}`,{
+            data:{
+                userRole: userRole
+            }
+        });
+        return response.data
+    } catch (error) {
+        throw new Error(error.response?.data?.mensaje || "Ha ocurrido un error");
+    }
+}
