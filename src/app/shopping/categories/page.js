@@ -1,4 +1,4 @@
-import { verifySession } from "@/app/lib/dal";
+
 import SidebarWrapper from "@/components/SidebarWrapper";
 import CategoriesPanel from "./CategoriesPanel";
 import { fetchCategories } from "./actions/categories";

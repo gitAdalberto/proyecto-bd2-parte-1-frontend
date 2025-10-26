@@ -56,7 +56,7 @@ export default function MyDrawer({ isAdmin }) {
                             {isAdmin && <DrawerButton href='/reports' leftIcon={<FaNewspaper />} >Reportes</DrawerButton>}
                             <Divider orientation='horizontal' />
                             <DrawerButton href='/shopping/categories' leftIcon={<MdCategory />} >Categorías</DrawerButton>
-                            <DrawerButton href='/dashboard' leftIcon={<FaProductHunt />} >Productos</DrawerButton>
+                            <DrawerButton href='/shopping/products' leftIcon={<FaProductHunt />} >Productos</DrawerButton>
                             <DrawerButton href='/dashboard' leftIcon={<MdInventory />} >Inventario</DrawerButton>
                             <DrawerButton href='/dashboard' leftIcon={<FaShoppingCart />} >Ventas</DrawerButton>
                         </Flex>

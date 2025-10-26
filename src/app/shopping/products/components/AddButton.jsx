@@ -1,46 +1,23 @@
 import { Button, FormControl, FormLabel, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, useDisclosure, useToast } from "@chakra-ui/react"
 import { AddIcon } from "@chakra-ui/icons"
 import { useState } from "react";
-import { createCategory } from "../actions/categories";
 
-export default function AddButton({handleRefresh}) {
+
+export default function AddButton({}) {
     const toast = useToast();
     const { isOpen, onOpen, onClose } = useDisclosure();
-    const [category, setCategory] = useState({
+    const [product, setProduct] = useState({
         nombre: "",
         descripcion: ""
     });
 
     const handleChange = (e) =>{
-        setCategory({
-            ...category,
+        setProduct({
+            ...product,
              [e.target.name]: e.target.value
         })
     };
 
-    const handleCreate = async () => {
-        const response = await createCategory(category);
-        if (response.success) {
-            toast({
-                title:"Categoria creada",
-                status: 'success',
-                isClosable: true,
-                duration: 5000
-            });
-            onClose();
-            handleRefresh();
-            return;
-        }
-        if (!response.success) {
-            toast({
-                title:"Error al crear categoria",
-                description: response?.data.mensaje,
-                status: 'error',
-                isClosable: true,
-                duration: 5000
-            });
-        }
-    }
 
     return (
         <>
@@ -49,12 +26,18 @@ export default function AddButton({handleRefresh}) {
             <Modal
                 isOpen={isOpen}
                 onClose={onClose}
+                isCentered
             >
                 <ModalOverlay />
                 <ModalContent>
                     <ModalHeader>Añadir Categoria</ModalHeader>
                     <ModalCloseButton />
                     <ModalBody pb={6}>
+                        <FormControl>
+                            <FormLabel>Codigo Producto</FormLabel>
+                            <Input placeholder='Codigo Producto' name="codigoProducto" onChange={handleChange}/>
+                        </FormControl>
+
                         <FormControl>
                             <FormLabel>Nombre</FormLabel>
                             <Input placeholder='Nombre' name="nombre" onChange={handleChange}/>
@@ -65,11 +48,21 @@ export default function AddButton({handleRefresh}) {
                             <Input placeholder='Descripcion' name="descripcion" onChange={handleChange}/>
                         </FormControl>
 
+                        <FormControl mt={4}>
+                            <FormLabel>Precio Venta</FormLabel>
+                            <Input placeholder='Precio Venta' name="precioVenta" onChange={handleChange}/>
+                        </FormControl>
+
+                        <FormControl mt={4}>
+                            <FormLabel>Precio Costo</FormLabel>
+                            <Input placeholder='Precio Costo' name="precioCosto" onChange={handleChange}/>
+                        </FormControl>
+
                     </ModalBody>
 
                     <ModalFooter>
-                        <Button colorScheme='blue' mr={3} onClick={()=>handleCreate()}>
-                            Imprimir
+                        <Button colorScheme='blue' mr={3}>
+                            Crear
                         </Button>
                         <Button onClick={onClose}>Cancel</Button>
                     </ModalFooter>
