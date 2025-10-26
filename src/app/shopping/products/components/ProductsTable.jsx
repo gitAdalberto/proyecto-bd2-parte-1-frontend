@@ -7,6 +7,8 @@ import {
     Td,
     TableContainer,
 } from '@chakra-ui/react'
+import DeleteButton from './DeleteButton'
+import EditButton from './EditButton'
 export default function ProductsTable({data}) {
     return (
         <TableContainer borderRadius="lg">
@@ -31,7 +33,8 @@ export default function ProductsTable({data}) {
                                 <Td>{d.fechaCreacion}</Td>
                                 <Td>{d.estado ? "Habilitada" : "Deshabilitada"}</Td>
                                 <Td display='flex' flexDirection='row' gap='0.5em'>
-                                                                    
+                                    <DeleteButton id={d.id}/>
+                                    <EditButton {...d} />
                                 </Td>
                             </Tr>
                         ))

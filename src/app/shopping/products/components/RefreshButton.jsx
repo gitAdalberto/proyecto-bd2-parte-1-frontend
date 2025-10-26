@@ -10,7 +10,7 @@ export default function RefreshButton() {
             variant='solid'
             onClick={
                 ()=>{
-                    queryClient.invalidateQueries({ queryKey:['products']});
+                    queryClient.resetQueries({ queryKey:['products']});
                 }
             }
         >

@@ -1,36 +1,36 @@
 import { Button, FormControl, FormLabel, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, useDisclosure, useToast } from "@chakra-ui/react"
-import { AddIcon } from "@chakra-ui/icons"
+import { EditIcon } from "@chakra-ui/icons"
 import { useState } from "react";
-import { usePostProduct } from "../hooks/useProducts";
+import { usePutProduct } from "../hooks/useProducts";
 
 
-export default function AddButton({}) {
-    const toast = useToast();
+export default function EditButton({id, codigoProducto, nombre, descripcion, precioVenta, precioCosto}) {
     const { isOpen, onOpen, onClose } = useDisclosure();
-    const mutation = usePostProduct(onClose);
+    const mutation = usePutProduct(onClose);
 
     const [product, setProduct] = useState({
-        codigoProducto: "",
-        nombre: "",
-        descripcion: "",
-        precioVenta: "",
-        precioCosto: ""
+        id: id,
+        codigoProducto: codigoProducto,
+        nombre: nombre,
+        descripcion: descripcion,
+        precioVenta: precioVenta,
+        precioCosto: precioCosto
     });
 
     const handleChange = (e) =>{
-        setProduct({
-            ...product,
-             [e.target.name]: e.target.value
-        })
+        setProduct((prev) => ({
+            ...prev,
+             [e.target.name]: e.target.value,
+        }))
     };
 
-    const handleCreate = () =>{
+    const handlePut = () =>{
         mutation.mutate(product);
     }
 
     return (
         <>
-            <Button onClick={onOpen} variant='solid' colorScheme="green" leftIcon={<AddIcon />} >Crear</Button>
+            <Button onClick={onOpen} variant='solid' colorScheme="blue" leftIcon={<EditIcon />}  iconSpacing={0} ></Button>
 
             <Modal
                 isOpen={isOpen}
@@ -44,33 +44,33 @@ export default function AddButton({}) {
                     <ModalBody pb={6}>
                         <FormControl>
                             <FormLabel>Codigo Producto</FormLabel>
-                            <Input placeholder='Codigo Producto' name="codigoProducto" onChange={handleChange}/>
+                            <Input placeholder='Codigo Producto' name="codigoProducto"  value={product.codigoProducto} onChange={handleChange}/>
                         </FormControl>
 
                         <FormControl>
                             <FormLabel>Nombre</FormLabel>
-                            <Input placeholder='Nombre' name="nombre" onChange={handleChange}/>
+                            <Input placeholder='Nombre' name="nombre" value={product.nombre} onChange={handleChange}/>
                         </FormControl>
 
                         <FormControl mt={4}>
                             <FormLabel>Descripcion</FormLabel>
-                            <Input placeholder='Descripcion' name="descripcion" onChange={handleChange}/>
+                            <Input placeholder='Descripcion' name="descripcion" value={product.descripcion} onChange={handleChange}/>
                         </FormControl>
 
                         <FormControl mt={4}>
                             <FormLabel>Precio Venta</FormLabel>
-                            <Input placeholder='Precio Venta' name="precioVenta" onChange={handleChange}/>
+                            <Input placeholder='Precio Venta' name="precioVenta" value={product.precioVenta} onChange={handleChange}/>
                         </FormControl>
 
                         <FormControl mt={4}>
                             <FormLabel>Precio Costo</FormLabel>
-                            <Input placeholder='Precio Costo' name="precioCosto" onChange={handleChange}/>
+                            <Input placeholder='Precio Costo' name="precioCosto"  value={product.precioCosto} onChange={handleChange}/>
                         </FormControl>
 
                     </ModalBody>
 
                     <ModalFooter>
-                        <Button colorScheme='blue' mr={3} onClick={handleCreate} >
+                        <Button colorScheme='blue' mr={3} onClick={handlePut} >
                             Crear
                         </Button>
                         <Button onClick={onClose}>Cancel</Button>

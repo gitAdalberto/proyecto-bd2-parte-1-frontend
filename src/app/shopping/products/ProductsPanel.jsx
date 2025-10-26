@@ -18,6 +18,7 @@ export default function ProductsPanel() {
                 <RefreshButton />
             </Flex>
             {isLoading && <Flex w='100%' justifyContent='center'><Spinner size="xl" /></Flex>}
+            
             {isError && <Flex w='100%' justifyContent='center'>{error}</Flex>}
             {
                 !isLoading && !isError && (
