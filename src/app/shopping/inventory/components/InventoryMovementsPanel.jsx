@@ -4,6 +4,7 @@ import AddButton from "./AddButton";
 import { useInventory } from "../hooks/useInventory";
 import InventoryMovementsTable from "./InventoryMovementsTable";
 import RefreshButton from "./RefreshButton";
+import ExportExcelButton from "@/components/excel/ToExcelButton";
 export default function InventoryMovementsPanel() {
     const { data, isLoading, isError, error } = useInventory();
     return (
@@ -14,6 +15,7 @@ export default function InventoryMovementsPanel() {
             <Flex gap='1em' direction='row' >
                 <AddButton />
                 <RefreshButton query={'inventoryMovements'}/>
+                <ExportExcelButton filename={'archivoMovimientosInventario'} rows={data} />
             </Flex>
             {isLoading && <Flex w='100%' justifyContent='center'><Spinner size="xl" /></Flex>}
 

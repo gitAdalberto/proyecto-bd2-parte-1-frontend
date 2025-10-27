@@ -22,6 +22,7 @@ import FilterButton from "./FilterButton";
 import RefreshButton from "@/components/RefreshButton";
 import { getFilterTransactions } from "@/actions/transactions";
 import CustomTable from "@/components/CustomTable";
+import ExportExcelButton from "@/components/excel/ToExcelButton";
 
 export default function TransactionPanel({ response }) {
     const [data, setData] = useState(response?.data || []);
@@ -66,7 +67,7 @@ export default function TransactionPanel({ response }) {
                             dateFormat(d.fechaHora)
                         ])}
                     />
-
+                    <ExportExcelButton filename={'archivoTransacciones'} rows={data} />
                 </Flex>
                 {pending && <Flex h='100vh'><Spinner size="xl" /></Flex>}
                 {error && <Flex>{error}</Flex>}

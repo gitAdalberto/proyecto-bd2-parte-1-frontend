@@ -1,3 +1,4 @@
+import ExportExcelButton from "@/components/excel/ToExcelButton";
 import PdfButton2 from "@/components/PdfButton2";
 import { Box, Flex, Text } from "@chakra-ui/react";
 
@@ -6,6 +7,7 @@ export default function LogPanel({ logs }) {
         <Flex w='100%' align='center' justifyContent='center' direction='column'>
             <Flex w="100%" mx="2em" mb='2em' direction="row" gap="1em" mt='1em'>
                 <PdfButton2 fileName="Reporte de Archivo Log" id='pdf-2' />
+                
             </Flex>
             <Flex
                 direction="column"

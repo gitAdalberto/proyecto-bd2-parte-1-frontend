@@ -32,6 +32,7 @@ import { useState, useTransition, useRef } from "react";
 
 import PdfButton3 from "@/components/PdfButton3";
 import { dateFormat } from "@/actions/dateformat";
+import ExportExcelButton from "@/components/excel/ToExcelButton";
 export default function FilterAccessComponent({ data }) {
     const [pending, startTransition] = useTransition();
     const [newData, setNewData] = useState(data?.data || []);
@@ -124,6 +125,7 @@ export default function FilterAccessComponent({ data }) {
                         dateFormat(s.fechaHora)
                     ])
                 } />
+                <ExportExcelButton filename={'archivoAccesosFiltrados'} rows={newData} />
             </Flex>
             <Flex w='100%' mt='2em' align='center' flex="1" overflow="auto" justifyContent='center'>
                 {pending && <Flex h='100vh'><Spinner size="xl" /></Flex>}

@@ -22,6 +22,7 @@ import SwitchUser from "./SwitchUser";
 import PdfButton2 from "@/components/PdfButton2";
 import PdfButton3 from "@/components/PdfButton3";
 import ShowInfo from "./ShowInfo";
+import ExportExcelButton from "@/components/excel/ToExcelButton";
 
 export default function UsersPanel({ initialUsers, initialError }) {
     const [users, setUsers] = useState(initialUsers);
@@ -60,6 +61,7 @@ export default function UsersPanel({ initialUsers, initialError }) {
                             ])
                         }
                     />
+                    <ExportExcelButton  filename={'archivoUsuarios'} rows={users} />
                 </Flex>
                 {pending && <Flex h='100vh'><Spinner size="xl" /></Flex>}
                 {error && <p style={{ color: "red" }}>{error}</p>}

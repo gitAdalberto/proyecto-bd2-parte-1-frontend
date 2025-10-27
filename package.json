@@ -16,6 +16,7 @@
     "@emotion/styled": "^11.14.1",
     "@tanstack/react-query": "^5.90.5",
     "axios": "^1.12.2",
+    "file-saver": "^2.0.5",
     "framer-motion": "^12.23.16",
     "html2pdf.js": "^0.12.1",
     "jose": "^6.1.0",
@@ -26,7 +27,8 @@
     "react-dom": "19.1.0",
     "react-google-recaptcha": "^3.1.0",
     "react-icons": "^5.5.0",
-    "sonner": "^2.0.7"
+    "sonner": "^2.0.7",
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
     "@tanstack/eslint-plugin-query": "^5.91.2"

@@ -1,3 +1,4 @@
+import ExportExcelButton from "@/components/excel/ToExcelButton";
 import PdfButton from "@/components/PdfButton";
 import PdfButton2 from "@/components/PdfButton2";
 import PdfButton3 from "@/components/PdfButton3";
@@ -22,6 +23,7 @@ export default function AvgTimeComponent({ data }) {
                         ])
                     }
                 />
+                <ExportExcelButton filename={'archivo tiempo uso promedio'} rows={newData} />
             </Flex>
             <Flex w='100%' mt='2em' align='center' justifyContent='center'>
                 {pending && <Flex h='100vh'><Spinner size="xl" /></Flex>}

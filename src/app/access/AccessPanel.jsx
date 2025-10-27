@@ -19,6 +19,7 @@ import { CheckIcon, RepeatIcon } from "@chakra-ui/icons";
 import { useState, useTransition } from 'react';
 import PdfButton from "@/components/PdfButton";
 import PdfButton2 from "@/components/PdfButton2";
+import ExportExcelButton from "@/components/excel/ToExcelButton";
 
 export default function AccessPanel({ initialData, initialError }) {
     const [data, setData] = useState(initialData || []);
@@ -29,6 +30,7 @@ export default function AccessPanel({ initialData, initialError }) {
             <Flex align="center" justifyContent="center" direction="column" mt='1em'>
                 <Flex w="80vw"  mb='2em' direction="row" gap="1em">
                     <PdfButton2 fileName="Reporte de accesos" id='pdf'/>
+                    <ExportExcelButton filename={'archivoAccesos1'} rows={data} />
                 </Flex>
                 {pending && <Flex h='100vh'><Spinner size="xl" /></Flex>}
                 {!pending && data.length > 0 && (

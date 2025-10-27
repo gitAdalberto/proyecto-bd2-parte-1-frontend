@@ -25,6 +25,7 @@ import ShowButton from "./ShowButton";
 import PdfButton2 from "@/components/PdfButton2";
 import PdfButton3 from "@/components/PdfButton3";
 import { dateFormat } from "@/actions/dateformat";
+import ExportExcelButton from "@/components/excel/ToExcelButton";
 
 
 
@@ -62,6 +63,7 @@ export default function StudentsTable({ initialStudents, initialError, role }) {
                             dateFormat(s.fechaRegistro)
                         ])
                     } />
+                    <ExportExcelButton  filename={'archivoEstudiantes'} rows={students} />
                 </Flex>
 
                 {pending && <Flex h='100vh'><Spinner size="xl" /></Flex>}

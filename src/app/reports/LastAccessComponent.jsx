@@ -1,4 +1,5 @@
 import { dateFormat } from "@/actions/dateformat";
+import ExportExcelButton from "@/components/excel/ToExcelButton";
 import PdfButton from "@/components/PdfButton";
 import PdfButton2 from "@/components/PdfButton2";
 import PdfButton3 from "@/components/PdfButton3";
@@ -24,6 +25,7 @@ export default function LastAccessComponent({ data, title }) {
                         ])
                     }
                 />
+                <ExportExcelButton filename={'archivo ultima conexion exitosa'} rows={newData} />
             </Flex>
             <Flex w='100%' mt='2em' align='center' justifyContent='center'>
                 {pending && <Flex h='100vh'><Spinner size="xl" /></Flex>}

@@ -4,10 +4,10 @@ import { useProducts } from "./hooks/useProducts";
 import ProductsTable from "./components/ProductsTable";
 import RefreshButton from "./components/RefreshButton";
 import AddButton from "./components/AddButton";
+import ExportExcelButton from "@/components/excel/ToExcelButton";
 
 export default function ProductsPanel() {
     const { data, isLoading, isError, error } = useProducts();
-    console.log({ data })
     return (
         <Flex w='100%' p='2em' direction='column' gap='2em'>
             <Flex justifyContent='center' w='100%' >
@@ -16,6 +16,7 @@ export default function ProductsPanel() {
             <Flex gap='1em' direction='row' >
                 <AddButton />
                 <RefreshButton />
+                <ExportExcelButton filename={'archivoProductos'} rows={data} />
             </Flex>
             {isLoading && <Flex w='100%' justifyContent='center'><Spinner size="xl" /></Flex>}
 
