@@ -1,7 +1,7 @@
 import { Button } from "@chakra-ui/react";
 import { RepeatIcon } from "@chakra-ui/icons";
 import { useQueryClient } from "@tanstack/react-query";
-export default function RefreshButton() {
+export default function RefreshButton({query}) {
     const queryClient = useQueryClient();
     return(
         <Button
@@ -10,7 +10,7 @@ export default function RefreshButton() {
             variant='solid'
             onClick={
                 ()=>{
-                    queryClient.resetQueries({ queryKey:['inventoryMovements']});
+                    queryClient.resetQueries({ queryKey:[query]});
                 }
             }
         >

@@ -13,7 +13,7 @@ export default function InventoryMovementsPanel() {
             </Flex>
             <Flex gap='1em' direction='row' >
                 <AddButton />
-                <RefreshButton />
+                <RefreshButton query={'inventoryMovements'}/>
             </Flex>
             {isLoading && <Flex w='100%' justifyContent='center'><Spinner size="xl" /></Flex>}
 

@@ -10,15 +10,14 @@ export const fetchInventoryMovements = async () => {
   const userRole = session?.role;
 
   try {
-    const response = await api.get("/inventario/movimientos",{
-        data: {
-            userRole: userRole
-        }
-    }
-    );
-    return response.data; 
+    const response = await api.get("/inventario/movimientos", {
+      data: {
+        userRole: userRole,
+      },
+    });
+    return response.data;
   } catch (error) {
-    console.log("error en fetchInventoryMovements")
+    console.log("error en fetchInventoryMovements");
     throw new Error(error.response?.data?.mensaje || "Ha ocurrido un error");
   }
 };
@@ -30,13 +29,12 @@ export const fetchInventoryHistory = async () => {
   const userRole = session?.role;
 
   try {
-    const response = await api.get("/inventario/bitacora",{
-        data: {
-            userRole: userRole
-        }
-    }
-    );
-    return response.data; 
+    const response = await api.get("/inventario/bitacora", {
+      data: {
+        userRole: userRole,
+      },
+    });
+    return response.data;
   } catch (error) {
     throw new Error(error.response?.data?.mensaje || "Ha ocurrido un error");
   }
@@ -56,20 +54,46 @@ export const postInvetoryMovements = async (obj) => {
   const cantidad = obj.cantidad;
   const motivo = obj.motivo;
 
-  console.log({obj});
+  console.log({ obj });
   try {
-    const response = await api.post("/inventario/movimientos",{
-        idProducto: idProducto,
-        tipoMovimiento: tipoMovimiento,
-        cantidad: cantidad,
-        motivo: motivo,
-        idUsuario: userId,
-        userRole: userRole
-    }
-    );
-    return response.data; 
+    const response = await api.post("/inventario/movimientos", {
+      idProducto: idProducto,
+      tipoMovimiento: tipoMovimiento,
+      cantidad: cantidad,
+      motivo: motivo,
+      idUsuario: userId,
+      userRole: userRole,
+    });
+    return response.data;
   } catch (error) {
-    console.log("error en fetchInventoryMovements")
+    console.log("error en fetchInventoryMovements");
     throw new Error(error.response?.data?.mensaje || "Ha ocurrido un error");
   }
-}
+};
+
+export const updateMinimunStock = async (obj) => {
+  const session = await verifySession();
+  if (!session) return null;
+
+  //recogemos el rol y id de la session
+  const userId = session?.userId;
+  const userRole = session?.role;
+
+  //recogemos propiedades
+  const id = obj.id;
+  const stock = obj.stock;
+
+  console.log({ obj });
+
+  try {
+    const response = await api.patch(`/inventario/${id}`, {
+      stock: stock,
+      userRole: userRole,
+    });
+    return response.data;
+  } catch (error) {
+    console.log("error en updateMinimunStock");
+    console.log(error)
+    throw new Error(error.response?.data?.mensaje || "Ha ocurrido un error");
+  }
+};

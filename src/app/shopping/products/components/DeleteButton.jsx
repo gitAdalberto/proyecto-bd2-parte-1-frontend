@@ -22,7 +22,7 @@ export default function DeleteButton({id}) {
             >
                 <ModalOverlay />
                 <ModalContent>
-                    <ModalHeader>Añadir Categoria</ModalHeader>
+                    <ModalHeader>Eliminar producto</ModalHeader>
                     <ModalCloseButton />
                     <ModalBody pb={6}>
                         <Text>¿Estas seguro de eliminar este producto?</Text>

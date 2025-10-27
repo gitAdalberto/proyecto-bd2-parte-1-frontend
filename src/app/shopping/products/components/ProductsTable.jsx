@@ -6,10 +6,12 @@ import {
     Th,
     Td,
     TableContainer,
+    Text,
 } from '@chakra-ui/react'
 import DeleteButton from './DeleteButton'
 import EditButton from './EditButton'
 import ModalCategories from './ModalCategories'
+import PactchStockButton from './PactchStockButton'
 export default function ProductsTable({data}) {
     return (
         <TableContainer borderRadius="lg">
@@ -35,7 +37,10 @@ export default function ProductsTable({data}) {
                                 <Td>{d.nombre}</Td>
                                 <Td>{d.descripcion}</Td>
                                 <Td>{d.stockActual }</Td>
-                                <Td>{d.stockMinimo  }</Td>
+                                <Td display='flex' flexDirection='row' gap='0.5em' align='center' justifyContent='space-between'>
+                                    <Text>{d.stockMinimo}</Text>
+                                    <PactchStockButton id={d.id}/>
+                                </Td>
                                 <Td>{d.fechaCreacion}</Td>
                                 <Td display='flex' flexDirection='row' gap='0.5em'>
                                     <EditButton {...d} />
