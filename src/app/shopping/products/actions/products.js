@@ -205,3 +205,27 @@ export const postProductCategory = async (myObj) =>{
         throw new Error(error.response?.data?.mensaje || "Ha ocurrido un error");
     }
 };
+
+export const fetchProductsByName = async (name) =>{
+    //Verificamos la sesion
+    const session = await verifySession();
+    if (!session) return null;
+
+    //recogemos el rol y id de la session
+    const userRole = session?.role;
+
+    const codigoProducto = name.queryKey[1];
+    console.log(codigoProducto);
+
+    try {
+        const response = await api.get(`/productos/${codigoProducto}`,{
+            data:{
+                userRole: userRole
+            }
+        });
+        return response.data;
+    } catch (error) {
+        console.log(error)
+        throw new Error(error.response?.data?.mensaje || "Ha ocurrido un error");
+    }
+};

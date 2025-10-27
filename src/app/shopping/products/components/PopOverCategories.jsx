@@ -12,21 +12,27 @@ import {
     Text,
     ButtonGroup,
     useDisclosure,
+    Flex,
 } from '@chakra-ui/react'
 import { useDeleteProductCategory } from '../hooks/useProducts';
 export default function PopOverCategories({ id, children }) {
     const { isOpen, onToggle, onClose } = useDisclosure();
     const mutation = useDeleteProductCategory(onClose);
 
-    const handleDelete = () =>{
+    const handleDelete = () => {
         mutation.mutate(id);
     }
 
     return (
-        <Popover placement='right' isOpen={isOpen}  onClose={onClose}>
-            <PopoverTrigger>
-                <Button w='100%' onClick={onToggle} >{children}</Button>
-            </PopoverTrigger>
+        <Popover placement='right' isOpen={isOpen} onClose={onClose}>
+
+            <Flex direction='row' gap='1em' w='100%' align='center' >
+                <Button onClick={onToggle} leftIcon={<DeleteIcon />} colorScheme='red' iconSpacing={0}></Button>
+                <PopoverTrigger>
+                    <Button w='100%'>{children}</Button>
+                </PopoverTrigger>
+            </Flex>
+
             <PopoverContent>
                 <PopoverArrow />
                 <PopoverCloseButton />

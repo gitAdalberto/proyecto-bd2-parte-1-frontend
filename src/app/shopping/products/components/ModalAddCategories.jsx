@@ -14,7 +14,7 @@ export default function ModalAddCategories({ productId }) {
             <Modal isOpen={isOpen} onClose={onClose} isCentered>
                 <ModalOverlay />
                 <ModalContent>
-                    <ModalHeader>Seleeccione Categoria a agregar</ModalHeader>
+                    <ModalHeader>Seleccione Categoria a agregar</ModalHeader>
                     <ModalCloseButton />
                     <ModalBody>
                         {isLoading && <Spinner/>}

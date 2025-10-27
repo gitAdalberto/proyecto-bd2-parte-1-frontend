@@ -57,7 +57,7 @@ export default function MyDrawer({ isAdmin }) {
                             <Divider orientation='horizontal' />
                             <DrawerButton href='/shopping/categories' leftIcon={<MdCategory />} >Categorías</DrawerButton>
                             <DrawerButton href='/shopping/products' leftIcon={<FaProductHunt />} >Productos</DrawerButton>
-                            <DrawerButton href='/dashboard' leftIcon={<MdInventory />} >Inventario</DrawerButton>
+                            <DrawerButton href='/shopping/inventory' leftIcon={<MdInventory />} >Inventario</DrawerButton>
                             <DrawerButton href='/dashboard' leftIcon={<FaShoppingCart />} >Ventas</DrawerButton>
                         </Flex>
                     </DrawerBody>

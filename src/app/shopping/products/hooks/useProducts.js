@@ -1,6 +1,6 @@
 
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { deleteProduct, deleteProductCategory, fetchCategories, fetchProductCategories, fetchProducts, postProduct, postProductCategory, putProduct } from "../actions/products";
+import { deleteProduct, deleteProductCategory, fetchCategories, fetchProductCategories, fetchProducts, fetchProductsByName, postProduct, postProductCategory, putProduct } from "../actions/products";
 import { useToast } from "@chakra-ui/react";
 export function useProducts() {
     return useQuery({
@@ -172,3 +172,11 @@ export function usePostProductCategory(onClose){
         },
     });
 }
+
+export function useProductNames(name) {
+    return useQuery({
+        queryKey: ["product", name],
+        queryFn: fetchProductsByName,
+        enabled: !!name
+    });
+};

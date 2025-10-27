@@ -1,5 +1,6 @@
-import { Button } from "@chakra-ui/react";
+import { Button, Flex } from "@chakra-ui/react";
 import { usePostProductCategory } from "../hooks/useProducts";
+import { AddIcon } from "@chakra-ui/icons";
 
 export default function ButtonAddCategory({ children, productId, categoryId, onClose }) {
     const mutation = usePostProductCategory(onClose);
@@ -11,13 +12,21 @@ export default function ButtonAddCategory({ children, productId, categoryId, onC
         )
     }
     return (
-        <Button
-            w='100%'
-            colorScheme="green"
-            variant='outline'
-            onClick={handlePost}
-        >
-            {children}
-        </Button>
+        <Flex direction='row'gap='1em'>
+            <Button
+                
+                colorScheme="green"
+                variant='solid'
+                onClick={handlePost}
+                leftIcon={<AddIcon />}
+                iconSpacing={0}
+            />
+                
+            <Button
+                w='100%'
+            >
+                {children}
+            </Button>
+        </Flex>
     )
 };

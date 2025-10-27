@@ -20,6 +20,8 @@ export default function ProductsTable({data}) {
                         <Th>Codigo</Th>
                         <Th>Nombre</Th>
                         <Th>Descripcion</Th>
+                        <Th>Stock Actual</Th>
+                        <Th>Stock Minimo</Th>
                         <Th>Fecha Creacion</Th>
                         <Th>Accion</Th>
                     </Tr>
@@ -32,6 +34,8 @@ export default function ProductsTable({data}) {
                                 <Td>{d.codigoProducto}</Td>
                                 <Td>{d.nombre}</Td>
                                 <Td>{d.descripcion}</Td>
+                                <Td>{d.stockActual }</Td>
+                                <Td>{d.stockMinimo  }</Td>
                                 <Td>{d.fechaCreacion}</Td>
                                 <Td display='flex' flexDirection='row' gap='0.5em'>
                                     <EditButton {...d} />
