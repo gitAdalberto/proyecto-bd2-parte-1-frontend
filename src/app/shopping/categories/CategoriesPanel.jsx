@@ -7,6 +7,7 @@ import { useState, useTransition } from "react"
 import  RefreshButton  from "./components/RefreshButton"
 import { fetchCategories } from "./actions/categories"
 import ExportExcelButton from "@/components/excel/ToExcelButton"
+import PdfButton3 from "@/components/PdfButton3"
 export default function CategoriesPanel({ response }) {
     const [data, setData] = useState(response?.data || []);
     const[pending, startTransition] = useTransition();
@@ -32,6 +33,17 @@ export default function CategoriesPanel({ response }) {
                 <AddButton handleRefresh={handleRefresh}/>
                 <RefreshButton handleRefresh={handleRefresh} />
                 <ExportExcelButton filename={'archivoCategorias'} rows={data}/>
+                <PdfButton3
+                    fileName='Reporte de categorias'
+                    headers={[["Nombre","Descripcion","Fecha Creacion"]]}
+                    rows={
+                        data.map((d)=>[
+                            d.nombre,
+                            d.descripcion,
+                            d.fechaCreacion
+                        ])
+                    }
+                />
             </Flex>
             {/*Tabla */}
             {pending && <Flex w='100%' justifyContent='center'><Spinner size="xl" /></Flex>}

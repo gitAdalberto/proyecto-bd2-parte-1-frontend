@@ -5,6 +5,7 @@ import ProductsTable from "./components/ProductsTable";
 import RefreshButton from "./components/RefreshButton";
 import AddButton from "./components/AddButton";
 import ExportExcelButton from "@/components/excel/ToExcelButton";
+import PdfButton3 from "@/components/PdfButton3";
 
 export default function ProductsPanel() {
     const { data, isLoading, isError, error } = useProducts();
@@ -17,6 +18,19 @@ export default function ProductsPanel() {
                 <AddButton />
                 <RefreshButton />
                 <ExportExcelButton filename={'archivoProductos'} rows={data} />
+                <PdfButton3
+                    fileName='Reporte de productos'
+                    headers={[["Codigo","Nombre","Descripcion","StockActual","StockMinimo","Fecha Creación"]]}
+                    rows={
+                        data.map((d)=>[
+                            d.codigoProducto,
+                            d.nombre,
+                            d.descripcion,
+                            d.stockActual,
+                            d.stockMinimo
+                        ])
+                    }
+                />
             </Flex>
             {isLoading && <Flex w='100%' justifyContent='center'><Spinner size="xl" /></Flex>}
 

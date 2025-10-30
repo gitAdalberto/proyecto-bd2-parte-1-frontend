@@ -5,6 +5,6 @@ import {Button} from "@chakra-ui/react"
 
 export default function PdfButton3({ fileName, headers, rows }) {
     return (
-        <Button colorScheme="red" variant='outline' onClick={() => { exportTableToPdf(fileName,headers,rows  )}} leftIcon={<DownloadIcon />}>Pdf</Button>
+        <Button colorScheme="red" variant='solid' onClick={() => { exportTableToPdf(fileName,headers,rows  )}} leftIcon={<DownloadIcon />}>Pdf</Button>
     )
 };

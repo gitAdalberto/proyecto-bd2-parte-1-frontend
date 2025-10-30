@@ -6,6 +6,7 @@ import IncomeTable from "./IncomeTable";
 import { FaChartBar, FaTable } from "react-icons/fa";
 import MyBarChart from "../Charts/MyBarChart";
 import IncomeBarChart from "./IncomeBarChart";
+import PdfButton3 from "@/components/PdfButton3";
 
 export default function IncomePanel() {
     const [obj, setObj] = useState({
@@ -23,6 +24,27 @@ export default function IncomePanel() {
         <Flex w='100%' direction='column' gap='1em'>
             <Flex gap='1em' direction='row'>
                 <ExportExcelButton filename={'Reporte Ventas con Filtros'} rows={data} />
+                <PdfButton3
+                    fileName="Reporte de ingresos totales"
+                    headers={[[
+                        "Mes",
+                        "TotalVentas",
+                        "Total productos vendidos",
+                        "Total unidades vendidas",
+                        "Subtotal",
+                        "Total Descuentos",
+                        "Ingresos Totales",
+                    ]]}
+                    rows={data && data.map((d) => [
+                        d.Mes,
+                        d.TotalVentas,
+                        d.TotalProductosVendidos,
+                        d.TotalUnidadesVendidas,
+                        d.Subtotal,
+                        d.TotalDescuentos,
+                        d.IngresosTotales,
+                    ])}
+                />
                 <Button
                     variant='solid'
                     colorScheme="blue"
@@ -49,13 +71,13 @@ export default function IncomePanel() {
 
             {isError && <Flex w='100%' justifyContent='center'>{error.message}</Flex>}
             {
-                !isLoading && !isError &&  !enabled  && (
+                !isLoading && !isError && !enabled && (
                     <IncomeTable data={data} />
                 )
             }
             {
-                !isLoading && !isError &&  enabled  && (
-                    <IncomeBarChart data={data}/>
+                !isLoading && !isError && enabled && (
+                    <IncomeBarChart data={data} />
                 )
             }
         </Flex>

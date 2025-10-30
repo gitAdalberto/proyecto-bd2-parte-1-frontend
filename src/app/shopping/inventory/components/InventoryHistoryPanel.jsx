@@ -4,6 +4,7 @@ import { useInventoryHistory } from "../hooks/useInventory";
 import InventoryHistoryTable from "./InventoryHistoryTable";
 import RefreshButton from "./RefreshButton";
 import ExportExcelButton from "@/components/excel/ToExcelButton";
+import PdfButton3 from "@/components/PdfButton3";
 export default function InventoryHistoryPanel() {
     const { data, isLoading, isError, error } = useInventoryHistory();
     return (
@@ -13,7 +14,21 @@ export default function InventoryHistoryPanel() {
             </Flex>
             <Flex gap='1em' direction='row' >
                 <RefreshButton query={'inventoryHistory'} />
-                <ExportExcelButton  filename={'archivoBitacoraInventario'}  rows={data} />
+                <ExportExcelButton filename={'archivoBitacoraInventario'} rows={data} />
+                <PdfButton3
+                    fileName='Reporte Bitacora del inventario'
+                    headers={[["Nombre", "Tipo Movimiento", "Accion", "Cantidad", "Stock Anterior", "Stock Nuevo", "Usuario", "Fecha y Hora"]]}
+                    rows={data.map((d) => [
+                        d.nombre,
+                        d.tipoMovimiento,
+                        d.accion,
+                        d.cantidad,
+                        d.stockAnterior,
+                        d.stockNuevo,
+                        d.usuario,
+                        d.fechaHora,
+                    ])}
+                />
             </Flex>
             {isLoading && <Flex w='100%' justifyContent='center'><Spinner size="xl" /></Flex>}
 

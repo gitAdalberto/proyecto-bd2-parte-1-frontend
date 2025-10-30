@@ -30,7 +30,7 @@ export default function SalesPanel() {
             {index === 2 && (
                 <>
                 <Flex justifyContent='center' w='100%' >
-                        <Heading fontWeight='normal'  >Realizar Venta</Heading>
+                        <Heading fontWeight='normal'  >Bitacora de Ventas</Heading>
                     </Flex>
                 <HistoryPanel setIndex={setIndex} />
                 </>
