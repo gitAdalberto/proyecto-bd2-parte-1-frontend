@@ -16,6 +16,7 @@ const roleRoutes = {
     "/shopping/products",
     "/shopping/inventory",
     "/shopping/sales",
+    "/shopping/reports",
   ], 
   secretaria: ["/", "/students", "/dashboard", "/options", "/unauthorized"],
 };

@@ -32,3 +32,43 @@ export const createCompleteSale = async (obj) => {
     throw new Error(error.response?.data?.mensaje || "Ha ocurrido un error");
   }
 };
+
+export const fetchSales = async () =>{
+    //Verificamos la sesion
+    const session = await verifySession();
+    if (!session) return null;
+
+    //recogemos el rol y id de la session
+    const userRole = session?.role;
+
+    try {
+        const response = await api.get('/ventas',{
+            data:{
+                userRole: userRole
+            }
+        });
+        return response.data;
+    } catch (error) {
+        throw new Error(error.response?.data?.mensaje || "Ha ocurrido un error");
+    }
+};
+
+export const fetchSalesHistory = async () =>{
+    //Verificamos la sesion
+    const session = await verifySession();
+    if (!session) return null;
+
+    //recogemos el rol y id de la session
+    const userRole = session?.role;
+
+    try {
+        const response = await api.get('/ventas/bitacora',{
+            data:{
+                userRole: userRole
+            }
+        });
+        return response.data;
+    } catch (error) {
+        throw new Error(error.response?.data?.mensaje || "Ha ocurrido un error");
+    }
+};

@@ -3,9 +3,10 @@ import ProductSelectionPanel from "./ProductSelectionPanel";
 import { useState } from "react";
 import SelectedProductTable from "./SelectedProductTable";
 import { useCreateCompleteSale } from "../../hooks/useSale";
+import { CloseIcon } from "@chakra-ui/icons";
 
 
-export default function CreateSalePanel() {
+export default function CreateSalePanel({ setIndex }) {
     const [productsList, setProductsList] = useState([]);
     const subtotal = productsList.reduce((acc, product) => acc + product.precioVenta * product.cantidad, 0) || 0;
     const [discount, setDiscount] = useState(0);
@@ -13,9 +14,15 @@ export default function CreateSalePanel() {
     const recipeNumber = "FAC-" + crypto.randomUUID().slice(0, 15).toUpperCase();
     const [isInvalid, setIsInvalid] = useState(true);
     const toast = useToast();
-    const mutation = useCreateCompleteSale();
 
+
+    const handleClean = () => {
+        setProductsList([]);
+        setIndex(0);
+    }
+    const mutation = useCreateCompleteSale(handleClean);
     const completeSale = () => {
+
         const venta = {
             numeroFactura: recipeNumber,
             subTotal: parseFloat(subtotal),
@@ -74,6 +81,15 @@ export default function CreateSalePanel() {
 
     return (
         <Flex direction='row' gap='1em' flexWrap='wrap'>
+            <Flex>
+                <Button
+                    colorScheme="red"
+                    leftIcon={<CloseIcon />}
+                    onClick={() => setIndex(0)}
+                >
+                    Cancelar
+                </Button>
+            </Flex>
             <Flex w='100%'>
                 <InputGroup size='md'>
                     <InputLeftAddon>
@@ -96,29 +112,9 @@ export default function CreateSalePanel() {
                     </InputRightElement>
                 </InputGroup>
             </Flex>
-            <Flex position='fixed' right='1em' top='1em' direction='column'>
-                <Button
-                    onClick={() => console.log({ productsList })}
-                >
-                    Imprimir lista
-                </Button>
-                <Button
-                    onClick={() => {
-                        const venta = {
-                            numeroFactura: recipeNumber,
-                            subtotal: subtotal,
-                            descuento: discount,
-                            total: total,
-                            estadoVenta: 1
-                        }
-                        console.log({ venta, productsList })
-                    }}
-                >
-                    Imprimir resultado
-                </Button>
-            </Flex>
+
             <ProductSelectionPanel handleAdd={handleAddProduct} />
-            <Flex direction='column' gap='0.5em' w='50%'>
+            <Flex direction='column' gap='0.5em' w='50%' align='center'>
 
                 {productsList.length === 0 && <Text>Ningun Producto Seleccionado</Text>}
                 {productsList && productsList.length > 0 && (
