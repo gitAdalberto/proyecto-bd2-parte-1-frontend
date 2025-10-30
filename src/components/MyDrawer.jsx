@@ -58,7 +58,7 @@ export default function MyDrawer({ isAdmin }) {
                             <DrawerButton href='/shopping/categories' leftIcon={<MdCategory />} >Categorías</DrawerButton>
                             <DrawerButton href='/shopping/products' leftIcon={<FaProductHunt />} >Productos</DrawerButton>
                             <DrawerButton href='/shopping/inventory' leftIcon={<MdInventory />} >Inventario</DrawerButton>
-                            <DrawerButton href='/dashboard' leftIcon={<FaShoppingCart />} >Ventas</DrawerButton>
+                            <DrawerButton href='/shopping/sales' leftIcon={<FaShoppingCart />} >Ventas</DrawerButton>
                         </Flex>
                     </DrawerBody>
 
